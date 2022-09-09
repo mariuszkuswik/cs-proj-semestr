@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="csprojModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Klienci">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="imie" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="nazwisko" Type="char" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Motorniczy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="imie" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="nazwisko" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="id_tramwaju" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Przystanki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nazwa" Type="char" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'csproj.dbo.Przystanki_na_trasie' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Przystanki_na_trasie">
+          <Key>
+            <PropertyRef Name="id_trasy" />
+            <PropertyRef Name="id_przystanku" />
+            <PropertyRef Name="numer_na_trasie" />
+          </Key>
+          <Property Name="id_trasy" Type="int" Nullable="false" />
+          <Property Name="id_przystanku" Type="int" Nullable="false" />
+          <Property Name="numer_na_trasie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tramwaje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="numer" Type="int" Nullable="false" />
+          <Property Name="data_ostatniego_przeglądu" Type="date" Nullable="false" />
+          <Property Name="id_trasy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trasy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_przysatnku_poczatkowego" Type="int" Nullable="false" />
+          <Property Name="id_przysatnku_koncowego" Type="int" Nullable="false" />
+          <Property Name="nazwa" Type="char" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Przystanki_na_trasie_Przystanki">
+          <End Role="Przystanki" Type="Self.Przystanki" Multiplicity="1" />
+          <End Role="Przystanki_na_trasie" Type="Self.Przystanki_na_trasie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Przystanki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Przystanki_na_trasie">
+              <PropertyRef Name="id_przystanku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Przystanki_na_trasie_Trasy">
+          <End Role="Trasy" Type="Self.Trasy" Multiplicity="1" />
+          <End Role="Przystanki_na_trasie" Type="Self.Przystanki_na_trasie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trasy">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Przystanki_na_trasie">
+              <PropertyRef Name="id_trasy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tramwaje_Trasy">
+          <End Role="Trasy" Type="Self.Trasy" Multiplicity="1" />
+          <End Role="Tramwaje" Type="Self.Tramwaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trasy">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tramwaje">
+              <PropertyRef Name="id_trasy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trasy_Przystanki">
+          <End Role="Przystanki" Type="Self.Przystanki" Multiplicity="1" />
+          <End Role="Trasy" Type="Self.Trasy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Przystanki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Trasy">
+              <PropertyRef Name="id_przysatnku_koncowego" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trasy_Przystanki1">
+          <End Role="Przystanki" Type="Self.Przystanki" Multiplicity="1" />
+          <End Role="Trasy" Type="Self.Trasy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Przystanki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Trasy">
+              <PropertyRef Name="id_przysatnku_poczatkowego" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="csprojModelStoreContainer">
+          <EntitySet Name="Klienci" EntityType="Self.Klienci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Motorniczy" EntityType="Self.Motorniczy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Przystanki" EntityType="Self.Przystanki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tramwaje" EntityType="Self.Tramwaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trasy" EntityType="Self.Trasy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Przystanki_na_trasie" EntityType="Self.Przystanki_na_trasie" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Przystanki_na_trasie].[id_trasy] AS [id_trasy], 
+    [Przystanki_na_trasie].[id_przystanku] AS [id_przystanku], 
+    [Przystanki_na_trasie].[numer_na_trasie] AS [numer_na_trasie]
+    FROM [dbo].[Przystanki_na_trasie] AS [Przystanki_na_trasie]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Przystanki_na_trasie_Przystanki" Association="Self.FK_Przystanki_na_trasie_Przystanki">
+            <End Role="Przystanki" EntitySet="Przystanki" />
+            <End Role="Przystanki_na_trasie" EntitySet="Przystanki_na_trasie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Przystanki_na_trasie_Trasy" Association="Self.FK_Przystanki_na_trasie_Trasy">
+            <End Role="Trasy" EntitySet="Trasy" />
+            <End Role="Przystanki_na_trasie" EntitySet="Przystanki_na_trasie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramwaje_Trasy" Association="Self.FK_Tramwaje_Trasy">
+            <End Role="Trasy" EntitySet="Trasy" />
+            <End Role="Tramwaje" EntitySet="Tramwaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trasy_Przystanki" Association="Self.FK_Trasy_Przystanki">
+            <End Role="Przystanki" EntitySet="Przystanki" />
+            <End Role="Trasy" EntitySet="Trasy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trasy_Przystanki1" Association="Self.FK_Trasy_Przystanki1">
+            <End Role="Przystanki" EntitySet="Przystanki" />
+            <End Role="Trasy" EntitySet="Trasy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="csprojModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Klienci">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="imie" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Motorniczy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="imie" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="id_tramwaju" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Przystanki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Przystanki_na_trasie" Relationship="Self.FK_Przystanki_na_trasie_Przystanki" FromRole="Przystanki" ToRole="Przystanki_na_trasie" />
+          <NavigationProperty Name="Trasy" Relationship="Self.FK_Trasy_Przystanki" FromRole="Przystanki" ToRole="Trasy" />
+          <NavigationProperty Name="Trasy1" Relationship="Self.FK_Trasy_Przystanki1" FromRole="Przystanki" ToRole="Trasy" />
+        </EntityType>
+        <EntityType Name="Tramwaje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="numer" Type="Int32" Nullable="false" />
+          <Property Name="data_ostatniego_przeglądu" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_trasy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Trasy" Relationship="Self.FK_Tramwaje_Trasy" FromRole="Tramwaje" ToRole="Trasy" />
+        </EntityType>
+        <EntityType Name="Trasy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_przysatnku_poczatkowego" Type="Int32" Nullable="false" />
+          <Property Name="id_przysatnku_koncowego" Type="Int32" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Przystanki" Relationship="Self.FK_Trasy_Przystanki" FromRole="Trasy" ToRole="Przystanki" />
+          <NavigationProperty Name="Przystanki1" Relationship="Self.FK_Trasy_Przystanki1" FromRole="Trasy" ToRole="Przystanki" />
+          <NavigationProperty Name="Tramwaje" Relationship="Self.FK_Tramwaje_Trasy" FromRole="Trasy" ToRole="Tramwaje" />
+          <NavigationProperty Name="Przystanki_na_trasie" Relationship="Self.FK_Przystanki_na_trasie_Trasy" FromRole="Trasy" ToRole="Przystanki_na_trasie" />
+        </EntityType>
+        <EntityType Name="Przystanki_na_trasie">
+          <Key>
+            <PropertyRef Name="id_trasy" />
+            <PropertyRef Name="id_przystanku" />
+            <PropertyRef Name="numer_na_trasie" />
+          </Key>
+          <Property Name="id_trasy" Type="Int32" Nullable="false" />
+          <Property Name="id_przystanku" Type="Int32" Nullable="false" />
+          <Property Name="numer_na_trasie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Przystanki" Relationship="Self.FK_Przystanki_na_trasie_Przystanki" FromRole="Przystanki_na_trasie" ToRole="Przystanki" />
+          <NavigationProperty Name="Trasy" Relationship="Self.FK_Przystanki_na_trasie_Trasy" FromRole="Przystanki_na_trasie" ToRole="Trasy" />
+        </EntityType>
+        <Association Name="FK_Przystanki_na_trasie_Przystanki">
+          <End Role="Przystanki" Type="Self.Przystanki" Multiplicity="1" />
+          <End Role="Przystanki_na_trasie" Type="Self.Przystanki_na_trasie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Przystanki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Przystanki_na_trasie">
+              <PropertyRef Name="id_przystanku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trasy_Przystanki">
+          <End Role="Przystanki" Type="Self.Przystanki" Multiplicity="1" />
+          <End Role="Trasy" Type="Self.Trasy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Przystanki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Trasy">
+              <PropertyRef Name="id_przysatnku_koncowego" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trasy_Przystanki1">
+          <End Role="Przystanki" Type="Self.Przystanki" Multiplicity="1" />
+          <End Role="Trasy" Type="Self.Trasy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Przystanki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Trasy">
+              <PropertyRef Name="id_przysatnku_poczatkowego" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tramwaje_Trasy">
+          <End Role="Trasy" Type="Self.Trasy" Multiplicity="1" />
+          <End Role="Tramwaje" Type="Self.Tramwaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trasy">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tramwaje">
+              <PropertyRef Name="id_trasy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Przystanki_na_trasie_Trasy">
+          <End Role="Trasy" Type="Self.Trasy" Multiplicity="1" />
+          <End Role="Przystanki_na_trasie" Type="Self.Przystanki_na_trasie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trasy">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Przystanki_na_trasie">
+              <PropertyRef Name="id_trasy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="csprojEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Klienci" EntityType="Self.Klienci" />
+          <EntitySet Name="Motorniczy" EntityType="Self.Motorniczy" />
+          <EntitySet Name="Przystanki" EntityType="Self.Przystanki" />
+          <EntitySet Name="Tramwaje" EntityType="Self.Tramwaje" />
+          <EntitySet Name="Trasy" EntityType="Self.Trasy" />
+          <EntitySet Name="Przystanki_na_trasie" EntityType="Self.Przystanki_na_trasie" />
+          <AssociationSet Name="FK_Przystanki_na_trasie_Przystanki" Association="Self.FK_Przystanki_na_trasie_Przystanki">
+            <End Role="Przystanki" EntitySet="Przystanki" />
+            <End Role="Przystanki_na_trasie" EntitySet="Przystanki_na_trasie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trasy_Przystanki" Association="Self.FK_Trasy_Przystanki">
+            <End Role="Przystanki" EntitySet="Przystanki" />
+            <End Role="Trasy" EntitySet="Trasy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trasy_Przystanki1" Association="Self.FK_Trasy_Przystanki1">
+            <End Role="Przystanki" EntitySet="Przystanki" />
+            <End Role="Trasy" EntitySet="Trasy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramwaje_Trasy" Association="Self.FK_Tramwaje_Trasy">
+            <End Role="Trasy" EntitySet="Trasy" />
+            <End Role="Tramwaje" EntitySet="Tramwaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Przystanki_na_trasie_Trasy" Association="Self.FK_Przystanki_na_trasie_Trasy">
+            <End Role="Trasy" EntitySet="Trasy" />
+            <End Role="Przystanki_na_trasie" EntitySet="Przystanki_na_trasie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="csprojModelStoreContainer" CdmEntityContainer="csprojEntities">
+          <EntitySetMapping Name="Klienci">
+            <EntityTypeMapping TypeName="csprojModel.Klienci">
+              <MappingFragment StoreEntitySet="Klienci">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Motorniczy">
+            <EntityTypeMapping TypeName="csprojModel.Motorniczy">
+              <MappingFragment StoreEntitySet="Motorniczy">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="id_tramwaju" ColumnName="id_tramwaju" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Przystanki">
+            <EntityTypeMapping TypeName="csprojModel.Przystanki">
+              <MappingFragment StoreEntitySet="Przystanki">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tramwaje">
+            <EntityTypeMapping TypeName="csprojModel.Tramwaje">
+              <MappingFragment StoreEntitySet="Tramwaje">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="numer" ColumnName="numer" />
+                <ScalarProperty Name="data_ostatniego_przeglądu" ColumnName="data_ostatniego_przeglądu" />
+                <ScalarProperty Name="id_trasy" ColumnName="id_trasy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trasy">
+            <EntityTypeMapping TypeName="csprojModel.Trasy">
+              <MappingFragment StoreEntitySet="Trasy">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_przysatnku_poczatkowego" ColumnName="id_przysatnku_poczatkowego" />
+                <ScalarProperty Name="id_przysatnku_koncowego" ColumnName="id_przysatnku_koncowego" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Przystanki_na_trasie">
+            <EntityTypeMapping TypeName="csprojModel.Przystanki_na_trasie">
+              <MappingFragment StoreEntitySet="Przystanki_na_trasie">
+                <ScalarProperty Name="id_trasy" ColumnName="id_trasy" />
+                <ScalarProperty Name="id_przystanku" ColumnName="id_przystanku" />
+                <ScalarProperty Name="numer_na_trasie" ColumnName="numer_na_trasie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
