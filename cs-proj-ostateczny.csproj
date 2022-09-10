@@ -181,6 +181,12 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Klienci.datasource" />
+    <None Include="Properties\DataSources\Motorniczy.datasource" />
+    <None Include="Properties\DataSources\Przystanki.datasource" />
+    <None Include="Properties\DataSources\Przystanki_na_trasie.datasource" />
+    <None Include="Properties\DataSources\Tramwaje.datasource" />
+    <None Include="Properties\DataSources\Trasy.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

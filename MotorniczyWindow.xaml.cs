@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.Entity;
 
 namespace cs_proj_ostateczny
 {
@@ -19,6 +21,8 @@ namespace cs_proj_ostateczny
     /// </summary>
     public partial class MotorniczyWindow : Window
     {
+        csprojEntities context = new csprojEntities();
+        CollectionViewSource motorniczyViewSource;
         public MotorniczyWindow()
         {
             InitializeComponent();
@@ -44,6 +48,20 @@ namespace cs_proj_ostateczny
         {
 
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            context.Motorniczy.Load();
+            System.Windows.Data.CollectionViewSource motorniczyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("motorniczyViewSource")));
+            // Załaduj dane poprzez ustawienie właściwości CollectionViewSource.Source:
+            motorniczyViewSource.Source = context.Motorniczy.Local;
+        }
 
+        private void Window_Loaded_1(object sender, RoutedEventArgs e)
+        {
+
+            System.Windows.Data.CollectionViewSource motorniczyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("motorniczyViewSource")));
+            // Załaduj dane poprzez ustawienie właściwości CollectionViewSource.Source:
+            // motorniczyViewSource.Źródło = [ogólne źródło danych]
+        }
     }
 }

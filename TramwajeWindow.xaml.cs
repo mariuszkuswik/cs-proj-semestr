@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.Entity;
 
 namespace cs_proj_ostateczny
 {
@@ -19,6 +21,9 @@ namespace cs_proj_ostateczny
     /// </summary>
     public partial class TramwajeWindow : Window
     {
+        csprojEntities context = new csprojEntities();
+        CollectionViewSource przystankiViewSource;
+
         public TramwajeWindow()
         {
             InitializeComponent();
@@ -43,5 +48,15 @@ namespace cs_proj_ostateczny
         {
 
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            context.Tramwaje.Load();
+            System.Windows.Data.CollectionViewSource tramwajeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tramwajeViewSource")));
+            // Załaduj dane poprzez ustawienie właściwości CollectionViewSource.Source:
+            tramwajeViewSource.Source = context.Tramwaje.Local;
+        }
+
+
     }
 }

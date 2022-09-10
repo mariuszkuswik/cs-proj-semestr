@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cs_proj_ostateczny"
         mc:Ignorable="d"
-        Title="TramwajeWindow" Height="450" Width="800">
+        Title="TramwajeWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="przystankiViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
         <Style
@@ -47,6 +47,7 @@
         <CollectionViewSource x:Key="przystankiViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
         <CollectionViewSource x:Key="przystankiViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
         <CollectionViewSource x:Key="przystankiViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}"/>
+        <CollectionViewSource x:Key="tramwajeViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Tramwaje}}"/>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
@@ -101,5 +102,19 @@
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
         </StackPanel>
+        <DataGrid x:Name="tramwajeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tramwajeViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="390,10,10,186" Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="data_ostatniego_przegląduColumn" Header="data ostatniego przeglądu" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding data_ostatniego_przeglądu, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="id_trasyColumn" Binding="{Binding id_trasy}" Header="id trasy" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numerColumn" Binding="{Binding numer}" Header="numer" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
