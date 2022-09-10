@@ -23,5 +23,28 @@ namespace cs_proj_ostateczny
         {
             InitializeComponent();
         }
+
+        private void NextCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+        private void PreviousCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+        private void DeleteCustomerCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+        private void UpdateCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+        private void AddCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }
