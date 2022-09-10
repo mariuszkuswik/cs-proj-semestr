@@ -10,19 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace cs_proj_ostateczny
 {
     /// <summary>
-    /// Logika interakcji dla klasy Przytanki.xaml
+    /// Logika interakcji dla klasy TrasyWindow.xaml
     /// </summary>
-    public partial class Przytanki : Window
+    public partial class TrasyWindow : Window
     {
-        public Przytanki()
+        public TrasyWindow()
         {
-            
+            InitializeComponent();
         }
     }
 }

@@ -27,8 +27,15 @@ namespace cs_proj_ostateczny
 
         private void PrzystankiButton_Click(object sender, RoutedEventArgs e)
         {
-            Przystanki subWindow = new Przystanki();
+            PrzystankiWindow subWindow = new PrzystankiWindow();
             subWindow.Show();
+        }
+
+        private void KlienciButton_Click(object sender, RoutedEventArgs e)
+        {
+            KlienciWindow subWindow = new KlienciWindow();
+            subWindow.Show();
+
         }
     }
 }

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\App.xaml
-3-1888503365
+7-2076304283
 2-1957146511
-1721450123
+21-1436647235
 18-1076767469
-Klienci.xaml;MainWindow.xaml;Przystanki.xaml;
+KlienciWindow.xaml;MainWindow.xaml;MotorniczyWindow.xaml;PrzystankiWindow.xaml;Przystanki_na_trasieWindow.xaml;TramwajeWindow.xaml;TrasyWindow.xaml;
 
 True
 

@@ -1,7 +1,6 @@
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs-proj-ostateczny.csproj.AssemblyReference.cache
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs-proj-ostateczny.csproj.SuggestedBindingRedirects.cache
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\MainWindow.g.cs
-C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\Przystanki.g.cs
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\App.g.cs
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs-proj-ostateczny_Content.g.cs
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs-proj-ostateczny_MarkupCompile.cache
@@ -14,7 +13,6 @@ C:\Users\Mariusz\source\repos\cs-proj-ostateczny\bin\Debug\EntityFramework.SqlSe
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\bin\Debug\EntityFramework.xml
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\MainWindow.baml
-C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\Przystanki.baml
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs-proj-ostateczny.g.resources
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs_proj_ostateczny.Properties.Resources.resources
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs-proj-ostateczny.csproj.GenerateResource.cache
@@ -22,3 +20,11 @@ C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs-proj-ostateczny.cs
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs-proj-ostateczny.csproj.CopyComplete
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs-proj-ostateczny.exe
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\cs-proj-ostateczny.pdb
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\KlienciWindow.g.cs
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\PrzystankiWindow.g.cs
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\TrasyWindow.g.cs
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\MotorniczyWindow.g.cs
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\KlienciWindow.baml
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\MotorniczyWindow.baml
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\PrzystankiWindow.baml
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\TrasyWindow.baml

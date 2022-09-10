@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace cs_proj_ostateczny
 {
     /// <summary>
-    /// Logika interakcji dla klasy Klienci.xaml
+    /// Logika interakcji dla klasy PrzystankiWindow.xaml
     /// </summary>
-    public partial class Klienci : Window
+    public partial class PrzystankiWindow : Window
     {
-        public Klienci()
+        public PrzystankiWindow()
         {
             InitializeComponent();
         }

@@ -12,6 +12,10 @@
                    Click="PrzystankiButton_Click">
             Przystanki
         </Button>
+        <Button x:Name="KlienciButton"
+                    Click="KlienciButton_Click">
+            Klienci
+        </Button>
         </StackPanel>
     </Grid>
 </Window>
