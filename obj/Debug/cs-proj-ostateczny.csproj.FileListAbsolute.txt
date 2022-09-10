@@ -28,3 +28,7 @@ C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\KlienciWindow.baml
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\MotorniczyWindow.baml
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\PrzystankiWindow.baml
 C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\TrasyWindow.baml
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\Przystanki_na_trasieWindow.g.cs
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\TramwajeWindow.g.cs
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\Przystanki_na_trasieWindow.baml
+C:\Users\Mariusz\source\repos\cs-proj-ostateczny\obj\Debug\TramwajeWindow.baml

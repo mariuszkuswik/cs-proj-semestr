@@ -16,6 +16,22 @@
                     Click="KlienciButton_Click">
             Klienci
         </Button>
+        <Button x:Name="MotorniczyButton"
+                   Click="MotorniczyButton_Click">
+                Motorniczy
+        </Button>
+        <Button x:Name="Przystanki_na_trasieButton"
+                   Click="Przystanki_na_trasieButton_Click">
+                Przystanki na trasie
+        </Button>
+        <Button x:Name="TramwajeButton"
+                   Click="TramwajeButton_Click">
+                Tramwaje
+        </Button>
+        <Button x:Name="TrasyButton"
+                   Click="TrasyButton_Click">
+                Trasy
+        </Button>
         </StackPanel>
     </Grid>
 </Window>

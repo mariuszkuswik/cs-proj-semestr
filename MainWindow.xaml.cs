@@ -37,5 +37,26 @@ namespace cs_proj_ostateczny
             subWindow.Show();
 
         }
+
+        private void MotorniczyButton_Click(object sender, RoutedEventArgs e)
+        {
+            MotorniczyWindow subWindow = new MotorniczyWindow();
+            subWindow.Show();
+        }
+        private void Przystanki_na_trasieButton_Click(object sender, RoutedEventArgs e)
+        {
+            Przystanki_na_trasieWindow subWindow = new Przystanki_na_trasieWindow();
+            subWindow.Show();
+        }
+        private void TramwajeButton_Click(object sender, RoutedEventArgs e)
+        {
+            TramwajeWindow subWindow = new TramwajeWindow();
+            subWindow.Show();
+        }
+        private void TrasyButton_Click(object sender, RoutedEventArgs e)
+        {
+            TrasyWindow subWindow = new TrasyWindow();
+            subWindow.Show();
+        }
     }
 }
