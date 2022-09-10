@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cs_proj_ostateczny"
         mc:Ignorable="d"
-        Title="KlienciWindow" Height="450" Width="800">
+        Title="KlienciWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="przystankiViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
         <Style
@@ -47,6 +47,7 @@
         <CollectionViewSource x:Key="przystankiViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
         <CollectionViewSource x:Key="przystankiViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
         <CollectionViewSource x:Key="przystankiViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}"/>
+        <CollectionViewSource x:Key="klienciViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}"/>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
@@ -101,5 +102,13 @@
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
         </StackPanel>
+        <DataGrid x:Name="klienciDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource klienciViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="390,10,10,186" Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="imieColumn" Binding="{Binding imie}" Header="imie" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nazwiskoColumn" Binding="{Binding nazwisko}" Header="nazwisko" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>
