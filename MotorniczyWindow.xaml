@@ -6,7 +6,100 @@
         xmlns:local="clr-namespace:cs_proj_ostateczny"
         mc:Ignorable="d"
         Title="MotorniczyWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Window.Resources>
+        <CollectionViewSource x:Key="przystankiViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
+        <Style
+            x:Key="Label"
+            BasedOn="{x:Null}"
+            TargetType="{x:Type Label}">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Height" Value="23" />
+        </Style>
+        <Style
+            x:Key="PrzystanekTextBox"
+            BasedOn="{x:Null}"
+            TargetType="{x:Type TextBox}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Height" Value="26" />
+            <Setter Property="Width" Value="120" />
+        </Style>
+        <Style
+            x:Key="NavButton"
+            BasedOn="{x:Null}"
+            TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontFamily" Value="Segoe UI Symbol" />
+            <Setter Property="Margin" Value="2,2,2,0" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="auto" />
+        </Style>
+
+        <RoutedUICommand x:Key="NextCommand" Text="Next" />
+        <RoutedUICommand x:Key="PreviousCommand" Text="Previous" />
+        <RoutedUICommand x:Key="DeleteCustomerCommand" Text="Delete Customer" />
+        <RoutedUICommand x:Key="UpdateCommand" Text="Update" />
+        <RoutedUICommand x:Key="AddCommand" Text="Add" />
+        <RoutedUICommand x:Key="CancelCommand" Text="Cancel" />
+        <CollectionViewSource x:Key="przystankiViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
+        <CollectionViewSource x:Key="przystankiViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
+        <CollectionViewSource x:Key="przystankiViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}"/>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
+        <CommandBinding Command="{StaticResource PreviousCommand}" Executed="PreviousCommandHandler" />
+        <CommandBinding Command="{StaticResource DeleteCustomerCommand}" Executed="DeleteCustomerCommandHandler" />
+        <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler" />
+        <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler" />
+    </Window.CommandBindings>
+    <Grid DataContext="{StaticResource przystankiViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            Height="36"
+            Margin="2,2,2,0"
+            VerticalAlignment="Top"
+            Background="Gainsboro"
+            DataContext="{StaticResource przystankiViewSource}"
+            Orientation="Horizontal"
+            d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            <Button
+                Name="btnPrev"
+                Command="{StaticResource PreviousCommand}"
+                Content="◄"
+                Style="{StaticResource NavButton}" />
+            <Button
+                Name="btnNext"
+                Command="{StaticResource NextCommand}"
+                Content="►"
+                Style="{StaticResource NavButton}" />
+            <Button
+                Name="btnDelete"
+                Width="120"
+                Command="{StaticResource DeleteCustomerCommand}"
+                Content="Usuń przystanek"
+                FontSize="11"
+                Style="{StaticResource NavButton}" />
+            <Button
+                Name="btnAdd"
+                Width="100"
+                Command="{StaticResource AddCommand}"
+                Content="Dodaj przystanek"
+                FontSize="11"
+                Style="{StaticResource NavButton}" />
+            <Button
+                Name="btnUpdate"
+                Width="80"
+                Command="{StaticResource UpdateCommand}"
+                Content="Zatwierdź"
+                FontSize="11"
+                Style="{StaticResource NavButton}" />
+        </StackPanel>
     </Grid>
 </Window>
