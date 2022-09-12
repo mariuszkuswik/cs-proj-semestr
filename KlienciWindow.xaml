@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="KlienciWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
-        <CollectionViewSource x:Key="przystankiViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
+        <CollectionViewSource x:Key="klienciViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}" />
         <Style
             x:Key="Label"
             BasedOn="{x:Null}"
@@ -18,7 +18,7 @@
             <Setter Property="Height" Value="23" />
         </Style>
         <Style
-            x:Key="PrzystanekTextBox"
+            x:Key="KlienciTextBox"
             BasedOn="{x:Null}"
             TargetType="{x:Type TextBox}">
             <Setter Property="HorizontalAlignment" Value="Right" />
@@ -44,10 +44,10 @@
         <RoutedUICommand x:Key="UpdateCommand" Text="Update" />
         <RoutedUICommand x:Key="AddCommand" Text="Add" />
         <RoutedUICommand x:Key="CancelCommand" Text="Cancel" />
-        <CollectionViewSource x:Key="przystankiViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
-        <CollectionViewSource x:Key="przystankiViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
-        <CollectionViewSource x:Key="przystankiViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}"/>
-        <CollectionViewSource x:Key="klienciViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}"/>
+        <CollectionViewSource x:Key="klienciViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}" />
+        <CollectionViewSource x:Key="klienciViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}" />
+        <CollectionViewSource x:Key="klienciViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}"/>
+        <CollectionViewSource x:Key="klienciViewSource4" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}"/>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
@@ -56,7 +56,7 @@
         <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler" />
         <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler" />
     </Window.CommandBindings>
-    <Grid DataContext="{StaticResource przystankiViewSource}">
+    <Grid DataContext="{StaticResource klienciViewSource}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -67,7 +67,7 @@
             Margin="2,2,2,0"
             VerticalAlignment="Top"
             Background="Gainsboro"
-            DataContext="{StaticResource przystankiViewSource}"
+            DataContext="{StaticResource klienciViewSource}"
             Orientation="Horizontal"
             d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
             <Button
@@ -102,6 +102,88 @@
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
         </StackPanel>
+        <Grid
+            x:Name="existingKlienciGrid"
+            Grid.Row="1"
+            Margin="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="AntiqueWhite"
+            DataContext="{StaticResource klienciViewSource}"
+            Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="300" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Content="PRZYSTANEK:"
+                Style="{StaticResource Label}" />
+            <Label
+                Grid.Row="1"
+                Content="Imie:"
+                Style="{StaticResource Label}" />
+            <TextBox
+                x:Name="addImieTextBox"
+                Grid.Row="1"
+                Style="{StaticResource KlienciTextBox}"
+                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="2"
+                Content="Nazwisko:"
+                Style="{StaticResource Label}" />
+            <TextBox
+                x:Name="addNazwiskoTextBox"
+                Grid.Row="2"
+                Style="{StaticResource KlienciTextBox}"
+                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+
+        </Grid>
+        <Grid
+            x:Name="newKlienciGrid"
+            Grid.Row="1"
+            Margin="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="CornflowerBlue"
+            DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=newKlienci, UpdateSourceTrigger=Explicit}"
+            Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="300" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Content="PRZYSTANEK:"
+                Style="{StaticResource Label}" />
+            <Label
+                Grid.Row="1"
+                Content="Imie:"
+                Style="{StaticResource Label}" />
+            <TextBox
+                x:Name="addImieTextBox1"
+                Grid.Row="1"
+                Style="{StaticResource KlienciTextBox}"
+                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="2"
+                Content="Nazwisko:"
+                Style="{StaticResource Label}" />
+            <TextBox
+                x:Name="addNazwiskoTextBox1"
+                Grid.Row="2"
+                Style="{StaticResource KlienciTextBox}"
+                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+
+        </Grid>
         <DataGrid x:Name="klienciDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource klienciViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="390,10,10,186" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>

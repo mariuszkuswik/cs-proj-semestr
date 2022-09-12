@@ -99,7 +99,7 @@
                 Style="{StaticResource NavButton}" />
         </StackPanel>
         <Grid
-            x:Name="existingPrzystanekGrid"
+            x:Name="existingMotorniczyGrid"
             Grid.Row="1"
             Margin="5"
             HorizontalAlignment="Left"
@@ -191,7 +191,7 @@
                 Content="TRAMWAJ:"
                 Style="{StaticResource Label}" />
             <ComboBox 
-                Grid.Row="3"
+                Grid.Row="3" Margin="1256,53,-1256,-53"
                 />
         </Grid>
         <DataGrid x:Name="motorniczyDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource motorniczyViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="390,10,10,186" Grid.Row="2">
