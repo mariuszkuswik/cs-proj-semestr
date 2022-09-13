@@ -43,6 +43,12 @@ namespace cs_proj_ostateczny
             // In a real application, you should add warnings and allow the user to cancel the operation.
             var selectedMotorniczy = motorniczyViewSource.View.CurrentItem as Motorniczy;
 
+            if (selectedMotorniczy == null)
+            {
+                MessageBox.Show("Brak motorniczych do usunięcia");
+                return;
+            }
+
             var motorniczy = (from c in context.Motorniczy
                               where c.id == selectedMotorniczy.id
                               select c).FirstOrDefault();
@@ -72,6 +78,12 @@ namespace cs_proj_ostateczny
         {
             if (newMotorniczyGrid.IsVisible)
             {
+
+                if (addMotorniczyComboBox.SelectedValue == null)
+                {
+                    MessageBox.Show("Należy wybrać tramwaj");
+                    return;
+                }
                 // Create a new object because the old one
                 // is being tracked by EF now.
                 Motorniczy newMotorniczy = new Motorniczy
@@ -90,7 +102,7 @@ namespace cs_proj_ostateczny
                 //}
 
                 // Insert the new customer at correct position:
-                int len = context.Motorniczy.Local.Count();
+                //int len = context.Motorniczy.Local.Count();
 
                 context.Motorniczy.Local.Add(newMotorniczy);
                 motorniczyViewSource.View.Refresh();
@@ -105,6 +117,12 @@ namespace cs_proj_ostateczny
             else
             {
                 Motorniczy currentMotorniczy = (Motorniczy)motorniczyViewSource.View.CurrentItem;
+
+                if (currentMotorniczy == null)
+                {
+                    MessageBox.Show("Należy wybrać motorniczego");
+                    return;
+                }
 
                 if (currentMotorniczy.imie.Length <= 0)
                 {
@@ -151,8 +169,8 @@ namespace cs_proj_ostateczny
         {
             context.Motorniczy.Load();
             context.Tramwaje.Load();
-            System.Windows.Data.CollectionViewSource motorniczyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("motorniczyViewSource")));
-            System.Windows.Data.CollectionViewSource tramwajeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tramwajeViewSource")));
+            motorniczyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("motorniczyViewSource")));
+            tramwajeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tramwajeViewSource")));
             // Załaduj dane poprzez ustawienie właściwości CollectionViewSource.Source:
             motorniczyViewSource.Source = context.Motorniczy.Local;
             tramwajeViewSource.Source = context.Tramwaje.Local;

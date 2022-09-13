@@ -154,10 +154,10 @@
                 x:Name="NazwaTextBox"
                 Grid.Row="1"
                 Style="{StaticResource TramwajeTextBox}"
-                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding numer, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <Label
                 Grid.Row="2"
-                Content="Numer:"
+                Content="Data ostatniego przegladu:"
                 Style="{StaticResource Label}" />
             <DatePicker
                 Grid.Row="2"
@@ -165,7 +165,7 @@
                 />
             <Label
                 Grid.Row="3"
-                Content="Numer:"
+                Content="ID trasy:"
                 Style="{StaticResource Label}" />
             <ComboBox
                 x:Name="TramwajeComboBox"
@@ -206,7 +206,7 @@
                 x:Name="addNazwaTextBox"
                 Grid.Row="1"
                 Style="{StaticResource TramwajeTextBox}"
-                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding numer, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
         </Grid>
         <DataGrid IsReadOnly="True" Margin="10,10,10,10" x:Name="tramwajeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tramwajeViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="2">
             <DataGrid.Columns>

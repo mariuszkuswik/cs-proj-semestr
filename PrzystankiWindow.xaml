@@ -130,7 +130,7 @@
                 x:Name="NazwaTextBox"
                 Grid.Row="1"
                 Style="{StaticResource PrzystanekTextBox}"
-                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
         </Grid>
         <Grid
             x:Name="newPrzystanekGrid"
@@ -160,7 +160,7 @@
                 x:Name="addNazwaTextBox"
                 Grid.Row="1"
                 Style="{StaticResource PrzystanekTextBox}"
-                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
         </Grid>
         <DataGrid IsReadOnly="True" x:Name="przystankiDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource przystankiViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,10" Grid.Row="2">
             <DataGrid.Columns>

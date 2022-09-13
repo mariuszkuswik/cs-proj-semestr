@@ -44,10 +44,6 @@
         <RoutedUICommand x:Key="UpdateCommand" Text="Update" />
         <RoutedUICommand x:Key="AddCommand" Text="Add" />
         <RoutedUICommand x:Key="CancelCommand" Text="Cancel" />
-        <CollectionViewSource x:Key="klienciViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}" />
-        <CollectionViewSource x:Key="klienciViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}" />
-        <CollectionViewSource x:Key="klienciViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}"/>
-        <CollectionViewSource x:Key="klienciViewSource4" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}"/>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
@@ -131,7 +127,7 @@
                 x:Name="addImieTextBox"
                 Grid.Row="1"
                 Style="{StaticResource KlienciTextBox}"
-                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding imie, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <Label
                 Grid.Row="2"
                 Content="Nazwisko:"
@@ -140,7 +136,7 @@
                 x:Name="addNazwiskoTextBox"
                 Grid.Row="2"
                 Style="{StaticResource KlienciTextBox}"
-                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding nazwisko, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
 
         </Grid>
         <Grid
@@ -172,7 +168,7 @@
                 x:Name="addImieTextBox1"
                 Grid.Row="1"
                 Style="{StaticResource KlienciTextBox}"
-                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding imie, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <Label
                 Grid.Row="2"
                 Content="Nazwisko:"
@@ -181,7 +177,7 @@
                 x:Name="addNazwiskoTextBox1"
                 Grid.Row="2"
                 Style="{StaticResource KlienciTextBox}"
-                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding nazwisko, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
 
         </Grid>
         <DataGrid IsReadOnly="True" x:Name="klienciDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource klienciViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,10" Grid.Row="2">
