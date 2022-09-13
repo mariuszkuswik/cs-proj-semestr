@@ -184,7 +184,7 @@
                 Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
 
         </Grid>
-        <DataGrid x:Name="klienciDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource klienciViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="390,10,10,186" Grid.Row="2">
+        <DataGrid IsReadOnly="True" x:Name="klienciDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource klienciViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,10" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="imieColumn" Binding="{Binding imie}" Header="imie" Width="SizeToHeader"/>

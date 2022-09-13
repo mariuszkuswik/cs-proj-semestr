@@ -23,6 +23,7 @@ namespace cs_proj_ostateczny
     {
         csprojEntities context = new csprojEntities();
         CollectionViewSource motorniczyViewSource;
+        CollectionViewSource tramwajeViewSource;
         public MotorniczyWindow()
         {
             InitializeComponent();
@@ -51,9 +52,12 @@ namespace cs_proj_ostateczny
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             context.Motorniczy.Load();
+            context.Tramwaje.Load();
             System.Windows.Data.CollectionViewSource motorniczyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("motorniczyViewSource")));
+            System.Windows.Data.CollectionViewSource tramwajeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tramwajeViewSource")));
             // Załaduj dane poprzez ustawienie właściwości CollectionViewSource.Source:
             motorniczyViewSource.Source = context.Motorniczy.Local;
+            tramwajeViewSource.Source = context.Tramwaje.Local;
         }
 
     }

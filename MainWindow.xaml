@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:cs_proj_ostateczny"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="100,100,100,100">
         <StackPanel>
         <Button x:Name="PrzystankiButton"
                    Click="PrzystankiButton_Click">

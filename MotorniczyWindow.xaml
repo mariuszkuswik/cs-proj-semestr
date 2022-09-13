@@ -8,6 +8,7 @@
         Title="MotorniczyWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="motorniczyViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Motorniczy}}" />
+        <CollectionViewSource x:Key="tramwajeViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Tramwaje}}" />
         <Style
             x:Key="Label"
             BasedOn="{x:Null}"
@@ -200,14 +201,18 @@
                 Grid.Row="3"
                 Content="TRAMWAJ:"
                 Style="{StaticResource Label}" />
-
             <ComboBox
-                Grid.Row="3" SelectionChanged="ComboBox_SelectionChanged"
-                Style="{StaticResource MotorniczyComboBox}" 
-                />
+                x:Name="MotorniczyComboBox"
+                Grid.Row="3"
+                DisplayMemberPath="numer"
+                IsSynchronizedWithCurrentItem="True"
+                ItemsSource="{Binding Source={StaticResource tramwajeViewSource}}"
+                SelectedValue="{Binding Path=id_tramwaju}"
+                SelectedValuePath="id"
+                Style="{StaticResource MotorniczyComboBox}" />
 
         </Grid>
-        <DataGrid x:Name="motorniczyDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource motorniczyViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="390,10,10,186" Grid.Row="2">
+        <DataGrid IsReadOnly="True" x:Name="motorniczyDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource motorniczyViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,10" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="id_tramwajuColumn" Binding="{Binding id_tramwaju}" Header="id tramwaju" Width="SizeToHeader"/>
@@ -217,3 +222,5 @@
         </DataGrid>
     </Grid>
 </Window>
+
+    

@@ -22,7 +22,8 @@ namespace cs_proj_ostateczny
     public partial class TramwajeWindow : Window
     {
         csprojEntities context = new csprojEntities();
-        CollectionViewSource przystankiViewSource;
+        CollectionViewSource tramwajeViewSource;
+        CollectionViewSource trasyViewSource;
 
         public TramwajeWindow()
         {
@@ -52,9 +53,12 @@ namespace cs_proj_ostateczny
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             context.Tramwaje.Load();
+            context.Trasy.Load();
             System.Windows.Data.CollectionViewSource tramwajeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tramwajeViewSource")));
+            System.Windows.Data.CollectionViewSource trasyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("trasyViewSource")));
             // Załaduj dane poprzez ustawienie właściwości CollectionViewSource.Source:
             tramwajeViewSource.Source = context.Tramwaje.Local;
+            trasyViewSource.Source = context.Trasy.Local;
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -8,6 +8,7 @@
         Title="TramwajeWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="tramwajeViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Tramwaje}}" />
+        <CollectionViewSource x:Key="trasyViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Trasy}}" />
         <Style
             x:Key="Label"
             BasedOn="{x:Null}"
@@ -167,9 +168,14 @@
                 Content="Numer:"
                 Style="{StaticResource Label}" />
             <ComboBox
-                Grid.Row="3" SelectionChanged="ComboBox_SelectionChanged"
-                Style="{StaticResource TramwajeComboBox}" 
-                />
+                x:Name="TramwajeComboBox"
+                Grid.Row="3"
+                DisplayMemberPath="nazwa"
+                IsSynchronizedWithCurrentItem="True"
+                ItemsSource="{Binding Source={StaticResource trasyViewSource}}"
+                SelectedValue="{Binding Path=id_trasy}"
+                SelectedValuePath="id"
+                Style="{StaticResource TramwajeComboBox}" />
 
         </Grid>
         <Grid
@@ -202,7 +208,7 @@
                 Style="{StaticResource TramwajeTextBox}"
                 Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
         </Grid>
-        <DataGrid x:Name="tramwajeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tramwajeViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="390,10,10,186" Grid.Row="2">
+        <DataGrid IsReadOnly="True" Margin="10,10,10,10" x:Name="tramwajeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tramwajeViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTemplateColumn x:Name="data_ostatniego_przegląduColumn" Header="data ostatniego przeglądu" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
