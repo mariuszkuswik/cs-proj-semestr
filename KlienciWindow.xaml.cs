@@ -30,7 +30,7 @@ namespace cs_proj_ostateczny
 
         private void NextCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-
+            klienciViewSource.View.MoveCurrentToNext();
         }
         private void PreviousCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {

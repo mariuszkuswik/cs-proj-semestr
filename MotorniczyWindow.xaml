@@ -184,7 +184,7 @@
                 Content="Imie:"
                 Style="{StaticResource Label}" />
             <TextBox
-                x:Name="addNazwaTextBox"
+                x:Name="addImieTextBox"
                 Grid.Row="1"
                 Style="{StaticResource MotorniczyTextBox}"
                 Text="{Binding Imie, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
@@ -202,7 +202,7 @@
                 Content="TRAMWAJ:"
                 Style="{StaticResource Label}" />
             <ComboBox
-                x:Name="MotorniczyComboBox"
+                x:Name="addMotorniczyComboBox"
                 Grid.Row="3"
                 DisplayMemberPath="numer"
                 IsSynchronizedWithCurrentItem="True"
