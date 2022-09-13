@@ -37,6 +37,26 @@
             <Setter Property="Width" Value="40" />
             <Setter Property="Height" Value="auto" />
         </Style>
+        <Style
+            x:Key="TramwajeComboBox"
+            BasedOn="{x:Null}"
+            TargetType="{x:Type ComboBox}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Height" Value="26" />
+            <Setter Property="Width" Value="120" />
+        </Style>
+        <Style
+            x:Key="TramwajeDatePicker"
+            BasedOn="{x:Null}"
+            TargetType="{x:Type DatePicker}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Height" Value="26" />
+            <Setter Property="Width" Value="120" />
+        </Style>
 
         <RoutedUICommand x:Key="NextCommand" Text="Next" />
         <RoutedUICommand x:Key="PreviousCommand" Text="Previous" />
@@ -140,13 +160,15 @@
                 Style="{StaticResource Label}" />
             <DatePicker
                 Grid.Row="2"
+                Style="{StaticResource TramwajeDatePicker}" 
                 />
             <Label
                 Grid.Row="3"
                 Content="Numer:"
                 Style="{StaticResource Label}" />
             <ComboBox
-                Grid.Row="3"
+                Grid.Row="3" SelectionChanged="ComboBox_SelectionChanged"
+                Style="{StaticResource TramwajeComboBox}" 
                 />
 
         </Grid>

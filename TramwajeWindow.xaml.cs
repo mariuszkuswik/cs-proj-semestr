@@ -57,6 +57,9 @@ namespace cs_proj_ostateczny
             tramwajeViewSource.Source = context.Tramwaje.Local;
         }
 
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
 }

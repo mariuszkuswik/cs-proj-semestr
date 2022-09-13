@@ -165,8 +165,6 @@
         <DataGrid x:Name="trasyDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource trasyViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="390,10,10,24" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="id_przysatnku_koncowegoColumn" Binding="{Binding id_przysatnku_koncowego}" Header="id przysatnku koncowego" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="id_przysatnku_poczatkowegoColumn" Binding="{Binding id_przysatnku_poczatkowego}" Header="id przysatnku poczatkowego" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nazwaColumn" Binding="{Binding nazwa}" Header="nazwa" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>

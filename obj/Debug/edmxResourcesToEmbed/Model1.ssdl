@@ -50,8 +50,6 @@ warning 6002: The table/view 'csproj.dbo.Przystanki_na_trasie' does not have a p
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" Nullable="false" />
-    <Property Name="id_przysatnku_poczatkowego" Type="int" Nullable="false" />
-    <Property Name="id_przysatnku_koncowego" Type="int" Nullable="false" />
     <Property Name="nazwa" Type="char" MaxLength="20" Nullable="false" />
   </EntityType>
   <Association Name="FK_Przystanki_na_trasie_Przystanki">
@@ -90,30 +88,6 @@ warning 6002: The table/view 'csproj.dbo.Przystanki_na_trasie' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Trasy_Przystanki">
-    <End Role="Przystanki" Type="Self.Przystanki" Multiplicity="1" />
-    <End Role="Trasy" Type="Self.Trasy" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Przystanki">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Trasy">
-        <PropertyRef Name="id_przysatnku_koncowego" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Trasy_Przystanki1">
-    <End Role="Przystanki" Type="Self.Przystanki" Multiplicity="1" />
-    <End Role="Trasy" Type="Self.Trasy" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Przystanki">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Trasy">
-        <PropertyRef Name="id_przysatnku_poczatkowego" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="csprojModelStoreContainer">
     <EntitySet Name="Klienci" EntityType="Self.Klienci" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Motorniczy" EntityType="Self.Motorniczy" Schema="dbo" store:Type="Tables" />
@@ -138,14 +112,6 @@ warning 6002: The table/view 'csproj.dbo.Przystanki_na_trasie' does not have a p
     <AssociationSet Name="FK_Tramwaje_Trasy" Association="Self.FK_Tramwaje_Trasy">
       <End Role="Trasy" EntitySet="Trasy" />
       <End Role="Tramwaje" EntitySet="Tramwaje" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Trasy_Przystanki" Association="Self.FK_Trasy_Przystanki">
-      <End Role="Przystanki" EntitySet="Przystanki" />
-      <End Role="Trasy" EntitySet="Trasy" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Trasy_Przystanki1" Association="Self.FK_Trasy_Przystanki1">
-      <End Role="Przystanki" EntitySet="Przystanki" />
-      <End Role="Trasy" EntitySet="Trasy" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -42,8 +42,6 @@
       <EntityTypeMapping TypeName="csprojModel.Trasy">
         <MappingFragment StoreEntitySet="Trasy">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="id_przysatnku_poczatkowego" ColumnName="id_przysatnku_poczatkowego" />
-          <ScalarProperty Name="id_przysatnku_koncowego" ColumnName="id_przysatnku_koncowego" />
           <ScalarProperty Name="nazwa" ColumnName="nazwa" />
         </MappingFragment>
       </EntityTypeMapping>

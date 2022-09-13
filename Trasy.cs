@@ -22,12 +22,8 @@ namespace cs_proj_ostateczny
         }
     
         public int id { get; set; }
-        public int id_przysatnku_poczatkowego { get; set; }
-        public int id_przysatnku_koncowego { get; set; }
         public string nazwa { get; set; }
     
-        public virtual Przystanki Przystanki { get; set; }
-        public virtual Przystanki Przystanki1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tramwaje> Tramwaje { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

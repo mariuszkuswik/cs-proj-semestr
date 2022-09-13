@@ -18,8 +18,6 @@ namespace cs_proj_ostateczny
         public Przystanki()
         {
             this.Przystanki_na_trasie = new HashSet<Przystanki_na_trasie>();
-            this.Trasy = new HashSet<Trasy>();
-            this.Trasy1 = new HashSet<Trasy>();
         }
     
         public int id { get; set; }
@@ -27,9 +25,5 @@ namespace cs_proj_ostateczny
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Przystanki_na_trasie> Przystanki_na_trasie { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Trasy> Trasy { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Trasy> Trasy1 { get; set; }
     }
 }

@@ -37,6 +37,16 @@
             <Setter Property="Width" Value="40" />
             <Setter Property="Height" Value="auto" />
         </Style>
+        <Style
+            x:Key="MotorniczyComboBox"
+            BasedOn="{x:Null}"
+            TargetType="{x:Type ComboBox}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Height" Value="26" />
+            <Setter Property="Width" Value="120" />
+        </Style>
 
         <RoutedUICommand x:Key="NextCommand" Text="Next" />
         <RoutedUICommand x:Key="PreviousCommand" Text="Previous" />
@@ -190,9 +200,12 @@
                 Grid.Row="3"
                 Content="TRAMWAJ:"
                 Style="{StaticResource Label}" />
-            <ComboBox 
-                Grid.Row="3" Margin="1256,53,-1256,-53"
+
+            <ComboBox
+                Grid.Row="3" SelectionChanged="ComboBox_SelectionChanged"
+                Style="{StaticResource MotorniczyComboBox}" 
                 />
+
         </Grid>
         <DataGrid x:Name="motorniczyDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource motorniczyViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="390,10,10,186" Grid.Row="2">
             <DataGrid.Columns>
