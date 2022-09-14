@@ -13,46 +13,6 @@
     <Window.Resources>
         <CollectionViewSource x:Key="motorniczyViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Motorniczy}}" />
         <CollectionViewSource x:Key="tramwajeViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Tramwaje}}" />
-        <Style
-            x:Key="Label"
-            BasedOn="{x:Null}"
-            TargetType="{x:Type Label}">
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="3" />
-            <Setter Property="Height" Value="23" />
-        </Style>
-        <Style
-            x:Key="MotorniczyTextBox"
-            BasedOn="{x:Null}"
-            TargetType="{x:Type TextBox}">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="3" />
-            <Setter Property="Height" Value="26" />
-            <Setter Property="Width" Value="120" />
-        </Style>
-        <Style
-            x:Key="NavButton"
-            BasedOn="{x:Null}"
-            TargetType="{x:Type Button}">
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="FontFamily" Value="Segoe UI Symbol" />
-            <Setter Property="Margin" Value="2,2,2,0" />
-            <Setter Property="Width" Value="40" />
-            <Setter Property="Height" Value="auto" />
-        </Style>
-        <Style
-            x:Key="MotorniczyComboBox"
-            BasedOn="{x:Null}"
-            TargetType="{x:Type ComboBox}">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="3" />
-            <Setter Property="Height" Value="26" />
-            <Setter Property="Width" Value="120" />
-        </Style>
-
         <RoutedUICommand x:Key="NextCommand" Text="Next" />
         <RoutedUICommand x:Key="PreviousCommand" Text="Previous" />
         <RoutedUICommand x:Key="DeleteCustomerCommand" Text="Delete Customer" />
@@ -142,7 +102,7 @@
             <TextBox
                 x:Name="ImieTextBox"
                 Grid.Row="1"
-                Style="{StaticResource MotorniczyTextBox}"
+                Style="{StaticResource TextBox}"
                 Text="{Binding imie, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <Label
                 Grid.Row="2"
@@ -151,7 +111,7 @@
             <TextBox
                 x:Name="NazwiskoTextBox"
                 Grid.Row="2"
-                Style="{StaticResource MotorniczyTextBox}"
+                Style="{StaticResource TextBox}"
                 Text="{Binding nazwisko, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <Label
                 Grid.Row="3"
@@ -188,7 +148,7 @@
             <TextBox
                 x:Name="addImieTextBox"
                 Grid.Row="1"
-                Style="{StaticResource MotorniczyTextBox}"
+                Style="{StaticResource TextBox}"
                 Text="{Binding imie, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <Label
                 Grid.Row="2"
@@ -197,7 +157,7 @@
             <TextBox
                 x:Name="addNazwiskoTextBox"
                 Grid.Row="2"
-                Style="{StaticResource MotorniczyTextBox}"
+                Style="{StaticResource TextBox}"
                 Text="{Binding nazwisko, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <Label
                 Grid.Row="3"
@@ -211,7 +171,7 @@
                 ItemsSource="{Binding Source={StaticResource tramwajeViewSource}}"
                 SelectedValue="{Binding Path=id_tramwaju}"
                 SelectedValuePath="id"
-                Style="{StaticResource MotorniczyComboBox}" />
+                Style="{StaticResource ComboBox}" />
 
         </Grid>
         <DataGrid

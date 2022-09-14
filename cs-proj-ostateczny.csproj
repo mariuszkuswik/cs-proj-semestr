@@ -70,7 +70,7 @@
     <Compile Include="Klienci.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="KlienciWindow.xaml.cs">
+    <Compile Include="Windows\KlienciWindow.xaml.cs">
       <DependentUpon>KlienciWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
@@ -91,38 +91,42 @@
     <Compile Include="Motorniczy.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="MotorniczyWindow.xaml.cs">
+    <Compile Include="Windows\MotorniczyWindow.xaml.cs">
       <DependentUpon>MotorniczyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Przystanki.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="PrzystankiWindow.xaml.cs">
+    <Compile Include="Windows\PrzystankiWindow.xaml.cs">
       <DependentUpon>PrzystankiWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Przystanki_na_trasie.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Przystanki_na_trasieWindow.xaml.cs">
+    <Compile Include="Windows\Przystanki_na_trasieWindow.xaml.cs">
       <DependentUpon>Przystanki_na_trasieWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tramwaje.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="TramwajeWindow.xaml.cs">
+    <Compile Include="Windows\TramwajeWindow.xaml.cs">
       <DependentUpon>TramwajeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Trasy.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="TrasyWindow.xaml.cs">
+    <Compile Include="Windows\TrasyWindow.xaml.cs">
       <DependentUpon>TrasyWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="KlienciWindow.xaml">
+    <Page Include="Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\KlienciWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -130,27 +134,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MotorniczyWindow.xaml">
+    <Page Include="Windows\MotorniczyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PrzystankiWindow.xaml">
+    <Page Include="Windows\PrzystankiWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Przystanki_na_trasieWindow.xaml">
+    <Page Include="Windows\Przystanki_na_trasieWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TramwajeWindow.xaml">
+    <Page Include="Windows\TramwajeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TrasyWindow.xaml">
+    <Page Include="Windows\TrasyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
