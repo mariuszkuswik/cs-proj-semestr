@@ -31,14 +31,39 @@ namespace cs_proj_ostateczny
         private void NextCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             klienciViewSource.View.MoveCurrentToNext();
+            if (klienciViewSource.View.IsCurrentAfterLast)
+            {
+                klienciViewSource.View.MoveCurrentToPrevious();
+            }
         }
         private void PreviousCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-
+            klienciViewSource.View.MoveCurrentToPrevious();
+            if (klienciViewSource.View.IsCurrentBeforeFirst)
+            {
+                klienciViewSource.View.MoveCurrentToNext();
+            }
         }
-        private void DeleteCustomerCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
+            var selectedKlient = klienciViewSource.View.CurrentItem as Klienci;
 
+            if (selectedKlient == null)
+            {
+                MessageBox.Show("Nie wybrano żadnego klienta");
+                return;
+            }
+
+            var klient = (from c in context.Klienci
+                              where c.id == selectedKlient.id
+                              select c).FirstOrDefault();
+
+            if (klient != null)
+            {
+                context.Klienci.Remove(klient);
+            }
+            context.SaveChanges();
+            klienciViewSource.View.Refresh();
         }
         private void UpdateCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {

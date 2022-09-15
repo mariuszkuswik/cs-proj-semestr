@@ -14,15 +14,14 @@
         <CollectionViewSource x:Key="klienciViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Klienci}}" />
         <RoutedUICommand x:Key="NextCommand" Text="Next" />
         <RoutedUICommand x:Key="PreviousCommand" Text="Previous" />
-        <RoutedUICommand x:Key="DeleteCustomerCommand" Text="Delete Customer" />
+        <RoutedUICommand x:Key="DeleteCommand" Text="Delete" />
         <RoutedUICommand x:Key="UpdateCommand" Text="Update" />
         <RoutedUICommand x:Key="AddCommand" Text="Add" />
-        <RoutedUICommand x:Key="CancelCommand" Text="Cancel" />
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
         <CommandBinding Command="{StaticResource PreviousCommand}" Executed="PreviousCommandHandler" />
-        <CommandBinding Command="{StaticResource DeleteCustomerCommand}" Executed="DeleteCustomerCommandHandler" />
+        <CommandBinding Command="{StaticResource DeleteCommand}" Executed="DeleteCommandHandler" />
         <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler" />
         <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler" />
     </Window.CommandBindings>
@@ -53,15 +52,15 @@
             <Button
                 Name="btnDelete"
                 Width="120"
-                Command="{StaticResource DeleteCustomerCommand}"
-                Content="Usuń klienta"
+                Command="{StaticResource DeleteCommand}"
+                Content="Usuń"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
             <Button
                 Name="btnAdd"
                 Width="100"
                 Command="{StaticResource AddCommand}"
-                Content="Dodaj klienta"
+                Content="Dodaj / Edytuj"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
             <Button
@@ -91,7 +90,7 @@
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
-                Content="PRZYSTANEK:"
+                Content="EDYTUJ KLIENTA:"
                 Style="{StaticResource Label}" />
             <Label
                 Grid.Row="1"
@@ -132,7 +131,7 @@
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
-                Content="PRZYSTANEK:"
+                Content="DODAJ KLIENTA:"
                 Style="{StaticResource Label}" />
             <Label
                 Grid.Row="1"
@@ -165,18 +164,13 @@
             RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    x:Name="idColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding id}"
-                    Header="id" />
-                <DataGridTextColumn
                     x:Name="imieColumn"
-                    Width="SizeToHeader"
+                    Width="Auto"
                     Binding="{Binding imie}"
                     Header="imie" />
                 <DataGridTextColumn
                     x:Name="nazwiskoColumn"
-                    Width="SizeToHeader"
+                    Width="Auto"
                     Binding="{Binding nazwisko}"
                     Header="nazwisko" />
             </DataGrid.Columns>

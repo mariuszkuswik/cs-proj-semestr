@@ -37,7 +37,7 @@ namespace cs_proj_ostateczny
         {
 
         }
-        private void DeleteCustomerCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
 
         }

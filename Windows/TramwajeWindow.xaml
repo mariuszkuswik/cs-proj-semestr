@@ -27,7 +27,7 @@
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
         <CommandBinding Command="{StaticResource PreviousCommand}" Executed="PreviousCommandHandler" />
-        <CommandBinding Command="{StaticResource DeleteCustomerCommand}" Executed="DeleteCustomerCommandHandler" />
+        <CommandBinding Command="{StaticResource DeleteCustomerCommand}" Executed="DeleteCommandHandler" />
         <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler" />
         <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler" />
     </Window.CommandBindings>
