@@ -14,21 +14,16 @@
         <CollectionViewSource x:Key="przystankiViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
         <RoutedUICommand x:Key="NextCommand" Text="Next" />
         <RoutedUICommand x:Key="PreviousCommand" Text="Previous" />
-        <RoutedUICommand x:Key="DeleteCustomerCommand" Text="Delete Customer" />
-        <RoutedUICommand x:Key="UpdateCommand" Text="Update" />
-        <RoutedUICommand x:Key="AddCommand" Text="Add" />
-        <RoutedUICommand x:Key="CancelCommand" Text="Cancel" />
-        <CollectionViewSource x:Key="przystankiViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
-        <CollectionViewSource x:Key="przystankiViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
-        <CollectionViewSource x:Key="przystankiViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
-        <CollectionViewSource x:Key="przystankiViewSource4" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
+        <RoutedUICommand x:Key="DeleteCommand" Text="Delete" />
+        <RoutedUICommand x:Key="SwitchCommand" Text="Switch" />
+        <RoutedUICommand x:Key="CommitCommand" Text="Commit" />
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
         <CommandBinding Command="{StaticResource PreviousCommand}" Executed="PreviousCommandHandler" />
-        <CommandBinding Command="{StaticResource DeleteCustomerCommand}" Executed="DeleteCustomerCommandHandler" />
-        <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler" />
-        <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler" />
+        <CommandBinding Command="{StaticResource DeleteCommand}" Executed="DeleteCommandHandler" />
+        <CommandBinding Command="{StaticResource SwitchCommand}" Executed="SwitchCommandHandler" />
+        <CommandBinding Command="{StaticResource CommitCommand}" Executed="CommitCommandHandler" />
     </Window.CommandBindings>
     <Grid DataContext="{StaticResource przystankiViewSource}">
         <Grid.RowDefinitions>
@@ -57,21 +52,21 @@
             <Button
                 Name="btnDelete"
                 Width="120"
-                Command="{StaticResource DeleteCustomerCommand}"
-                Content="Usuń przystanek"
+                Command="{StaticResource DeleteCommand}"
+                Content="Usuń"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
             <Button
                 Name="btnAdd"
                 Width="100"
-                Command="{StaticResource AddCommand}"
-                Content="Dodaj przystanek"
+                Command="{StaticResource SwitchCommand}"
+                Content="Dodaj / Edytuj"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
             <Button
                 Name="btnUpdate"
                 Width="80"
-                Command="{StaticResource UpdateCommand}"
+                Command="{StaticResource CommitCommand}"
                 Content="Zatwierdź"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
@@ -94,14 +89,14 @@
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
-                Content="PRZYSTANEK:"
+                Content="EDYTUJ PRZYSTANEK:"
                 Style="{StaticResource Label}" />
             <Label
                 Grid.Row="1"
                 Content="Nazwa:"
                 Style="{StaticResource Label}" />
             <TextBox
-                x:Name="NazwaTextBox"
+                x:Name="existingNazwaTextBox"
                 Grid.Row="1"
                 Style="{StaticResource TextBox}"
                 Text="{Binding nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
@@ -124,7 +119,7 @@
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
-                Content="PRZYSTANEK:"
+                Content="DODAJ PRZYSTANEK:"
                 Style="{StaticResource Label}" />
             <Label
                 Grid.Row="1"
@@ -147,13 +142,8 @@
             RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    x:Name="idColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding id}"
-                    Header="id" />
-                <DataGridTextColumn
                     x:Name="nazwaColumn"
-                    Width="SizeToHeader"
+                    Width="Auto"
                     Binding="{Binding nazwa}"
                     Header="nazwa" />
             </DataGrid.Columns>
