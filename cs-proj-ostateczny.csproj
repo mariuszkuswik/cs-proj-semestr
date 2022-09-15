@@ -67,9 +67,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IdClass.cs" />
     <Compile Include="Klienci.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils.cs" />
     <Compile Include="Windows\KlienciWindow.xaml.cs">
       <DependentUpon>KlienciWindow.xaml</DependentUpon>
     </Compile>

@@ -65,13 +65,90 @@ namespace cs_proj_ostateczny
             context.SaveChanges();
             klienciViewSource.View.Refresh();
         }
-        private void UpdateCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        private void CommitCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
+            if (newKlienciGrid.IsVisible)
+            {
+
+                Klienci newKlient = new Klienci
+                {
+                    id = Utils.getNextId(context.Klienci),
+                    imie = addImieTextBox.Text,
+                    nazwisko = addNazwiskoTextBox.Text,
+                };
+
+                if (newKlient.imie.Length <= 0)
+                {
+                    MessageBox.Show("Imię nie może być puste");
+                    return;
+                }
+
+                if (newKlient.nazwisko.Length <= 0)
+                {
+                    MessageBox.Show("Nazwisko nie może być puste");
+                    return;
+                }
+
+                context.Klienci.Local.Add(newKlient);
+                klienciViewSource.View.Refresh();
+                klienciViewSource.View.MoveCurrentTo(newKlient);
+
+
+                newKlienciGrid.Visibility = Visibility.Collapsed;
+                existingKlienciGrid.Visibility = Visibility.Visible;
+                btnDelete.IsEnabled = true;
+            }
+            else
+            {
+                Klienci currentKlient = (Klienci)klienciViewSource.View.CurrentItem;
+
+                if (currentKlient == null)
+                {
+                    MessageBox.Show("Należy wybrać klienta");
+                    return;
+                }
+
+                if (currentKlient.imie.Length <= 0)
+                {
+                    MessageBox.Show("Imię nie może być puste");
+                    return;
+                }
+
+                if (currentKlient.nazwisko.Length <= 0)
+                {
+                    MessageBox.Show("Nazwisko nie może być puste");
+                    return;
+                }
+
+            }
+            
+            context.SaveChanges();
 
         }
-        private void AddCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        private void SwitchCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
+            if (existingKlienciGrid.Visibility == Visibility.Collapsed)
+            {
+                existingKlienciGrid.Visibility = Visibility.Visible;
+                newKlienciGrid.Visibility = Visibility.Collapsed;
+                btnDelete.IsEnabled = true;
+            }
+            else
+            {
+                existingKlienciGrid.Visibility = Visibility.Collapsed;
+                newKlienciGrid.Visibility = Visibility.Visible;
+                btnDelete.IsEnabled = false;
 
+                // Clear all the text boxes before adding a new customer.
+                foreach (var child in newKlienciGrid.Children)
+                {
+                    var tb = child as TextBox;
+                    if (tb != null)
+                    {
+                        tb.Text = "";
+                    }
+                }
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

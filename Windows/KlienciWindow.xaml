@@ -15,15 +15,15 @@
         <RoutedUICommand x:Key="NextCommand" Text="Next" />
         <RoutedUICommand x:Key="PreviousCommand" Text="Previous" />
         <RoutedUICommand x:Key="DeleteCommand" Text="Delete" />
-        <RoutedUICommand x:Key="UpdateCommand" Text="Update" />
-        <RoutedUICommand x:Key="AddCommand" Text="Add" />
+        <RoutedUICommand x:Key="SwitchCommand" Text="Switch" />
+        <RoutedUICommand x:Key="CommitCommand" Text="Commit" />
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
         <CommandBinding Command="{StaticResource PreviousCommand}" Executed="PreviousCommandHandler" />
         <CommandBinding Command="{StaticResource DeleteCommand}" Executed="DeleteCommandHandler" />
-        <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler" />
-        <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler" />
+        <CommandBinding Command="{StaticResource SwitchCommand}" Executed="SwitchCommandHandler" />
+        <CommandBinding Command="{StaticResource CommitCommand}" Executed="CommitCommandHandler" />
     </Window.CommandBindings>
     <Grid DataContext="{StaticResource klienciViewSource}">
         <Grid.RowDefinitions>
@@ -59,14 +59,14 @@
             <Button
                 Name="btnAdd"
                 Width="100"
-                Command="{StaticResource AddCommand}"
+                Command="{StaticResource SwitchCommand}"
                 Content="Dodaj / Edytuj"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
             <Button
                 Name="btnUpdate"
                 Width="80"
-                Command="{StaticResource UpdateCommand}"
+                Command="{StaticResource CommitCommand}"
                 Content="Zatwierdź"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
@@ -97,7 +97,7 @@
                 Content="Imie:"
                 Style="{StaticResource Label}" />
             <TextBox
-                x:Name="addImieTextBox"
+                x:Name="existingImieTextBox"
                 Grid.Row="1"
                 Style="{StaticResource TextBox}"
                 Text="{Binding imie, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
@@ -106,7 +106,7 @@
                 Content="Nazwisko:"
                 Style="{StaticResource Label}" />
             <TextBox
-                x:Name="addNazwiskoTextBox"
+                x:Name="existingNazwiskoTextBox"
                 Grid.Row="2"
                 Style="{StaticResource TextBox}"
                 Text="{Binding nazwisko, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
@@ -138,7 +138,7 @@
                 Content="Imie:"
                 Style="{StaticResource Label}" />
             <TextBox
-                x:Name="addImieTextBox1"
+                x:Name="addImieTextBox"
                 Grid.Row="1"
                 Style="{StaticResource TextBox}"
                 Text="{Binding imie, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
@@ -147,7 +147,7 @@
                 Content="Nazwisko:"
                 Style="{StaticResource Label}" />
             <TextBox
-                x:Name="addNazwiskoTextBox1"
+                x:Name="addNazwiskoTextBox"
                 Grid.Row="2"
                 Style="{StaticResource TextBox}"
                 Text="{Binding nazwisko, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
