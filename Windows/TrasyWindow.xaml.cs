@@ -36,7 +36,7 @@ namespace cs_proj_ostateczny
         }
         private void NextCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (existingPrzystankiNaTrasieGrid.IsEnabled)
+            if (newPrzystankiNaTrasieGrid.IsEnabled)
             {
                 przystankiNaTrasieViewSource.View.MoveCurrentToNext();
                 if (przystankiNaTrasieViewSource.View.IsCurrentAfterLast)
@@ -54,7 +54,7 @@ namespace cs_proj_ostateczny
         }
         private void PreviousCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (existingPrzystankiNaTrasieGrid.IsEnabled)
+            if (newPrzystankiNaTrasieGrid.IsEnabled)
             {
                 przystankiNaTrasieViewSource.View.MoveCurrentToPrevious();
                 if (przystankiNaTrasieViewSource.View.IsCurrentBeforeFirst)
@@ -72,7 +72,7 @@ namespace cs_proj_ostateczny
         }
         private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (existingPrzystankiNaTrasieGrid.IsEnabled)
+            if (newPrzystankiNaTrasieGrid.IsEnabled)
             {
                 var selectedPrzystanekNaTrasie = przystankiNaTrasieViewSource.View.CurrentItem as Przystanki_na_trasie;
 
@@ -123,9 +123,61 @@ namespace cs_proj_ostateczny
             context.SaveChanges();
             trasyViewSource.View.Refresh();
         }
+
+        private void InsertNewPrzystanek(int przystanekId, int trasaId, int numerNaTrasie)
+        {
+
+            var numeryPrzystanków = new List<int>();
+
+            foreach (var przystanekNaTrasie in context.Przystanki_na_trasie)
+            {
+                if (przystanekNaTrasie.id_trasy == trasaId)
+                {
+                    numeryPrzystanków.Add(przystanekNaTrasie.numer_na_trasie);
+                }
+            }
+
+            Przystanki_na_trasie newPrzystanekNaTrasie = new Przystanki_na_trasie
+            {
+                id_trasy = trasaId,
+                id_przystanku = przystanekId,
+                numer_na_trasie = numerNaTrasie
+            };
+
+            Dictionary<int, int> numeryMap = new Dictionary<int, int>();
+            numeryPrzystanków.Sort();
+
+            var tmpNumer = numerNaTrasie;
+            foreach (var numer in numeryPrzystanków)
+            {
+                if (numer == tmpNumer)
+                {
+                    numeryMap[numer] = numer + 1;
+                    tmpNumer++;
+                }
+                else
+                {
+                    numeryMap[numer] = numer;
+                }
+            }
+
+            foreach (var przystanekNaTrasie in context.Przystanki_na_trasie)
+            {
+
+                if (przystanekNaTrasie.id_trasy == trasaId)
+                {
+                    przystanekNaTrasie.numer_na_trasie = numeryMap[przystanekNaTrasie.numer_na_trasie];
+
+                }
+            }
+
+            context.Przystanki_na_trasie.Local.Add(newPrzystanekNaTrasie);
+            przystankiNaTrasieViewSource.View.Refresh();
+            przystankiNaTrasieViewSource.View.MoveCurrentTo(newPrzystanekNaTrasie);
+        }
         private void CommitCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (existingPrzystankiNaTrasieGrid.IsEnabled)
+            if (newPrzystankiNaTrasieGrid.IsEnabled)
             {
                 if (newPrzystankiNaTrasieGrid.IsVisible)
                 {
@@ -153,39 +205,14 @@ namespace cs_proj_ostateczny
                     }
 
 
-                    Przystanki_na_trasie newPrzystanekNaTrasie = new Przystanki_na_trasie
-                    {
-                        id_trasy = trasaId,
-                        id_przystanku = przystanekId,
-                        numer_na_trasie = Int32.Parse(addPrzystanekNaTrasieTextBox.Text)
-                    };
+                    var numerNaTrasie = Int32.Parse(addPrzystanekNaTrasieTextBox.Text);
 
-                   
-                    context.Przystanki_na_trasie.Local.Add(newPrzystanekNaTrasie);
-                    przystankiNaTrasieViewSource.View.Refresh();
-                    przystankiNaTrasieViewSource.View.MoveCurrentTo(newPrzystanekNaTrasie);
+                    InsertNewPrzystanek(przystanekId, trasaId, numerNaTrasie);
 
 
                     newTrasyGrid.Visibility = Visibility.Collapsed;
                     existingTrasyGrid.Visibility = Visibility.Visible;
                     btnDelete.IsEnabled = true;
-                }
-                else
-                {
-                    Przystanki_na_trasie currentPrzystanekNaTrasie = (Przystanki_na_trasie)przystankiNaTrasieViewSource.View.CurrentItem;
-
-                    if (currentPrzystanekNaTrasie == null)
-                    {
-                        MessageBox.Show("Należy wybrać przystanek");
-                        return;
-                    }
-
-                    if (existingPrzystanekNaTrasieTextBox.Text == "")
-                    {
-                        MessageBox.Show("Numer na trasie nie może być pusty");
-                        return;
-                    }
-
                 }
 
                 context.SaveChanges();
@@ -238,30 +265,8 @@ namespace cs_proj_ostateczny
         }
         private void SwitchCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (existingPrzystankiNaTrasieGrid.IsEnabled)
+            if (newPrzystankiNaTrasieGrid.IsEnabled)
             {
-                if (existingPrzystankiNaTrasieGrid.Visibility == Visibility.Collapsed)
-                {
-                    existingPrzystankiNaTrasieGrid.Visibility = Visibility.Visible;
-                    newPrzystankiNaTrasieGrid.Visibility = Visibility.Collapsed;
-                    btnDelete.IsEnabled = true;
-                }
-                else
-                {
-                    existingPrzystankiNaTrasieGrid.Visibility = Visibility.Collapsed;
-                    newPrzystankiNaTrasieGrid.Visibility = Visibility.Visible;
-                    btnDelete.IsEnabled = false;
-
-                    // Clear all the text boxes before adding a new customer.
-                    foreach (var child in newPrzystankiNaTrasieGrid.Children)
-                    {
-                        var tb = child as TextBox;
-                        if (tb != null)
-                        {
-                            tb.Text = "";
-                        }
-                    }
-                }
                 return;
             }
 
@@ -277,7 +282,6 @@ namespace cs_proj_ostateczny
                 newTrasyGrid.Visibility = Visibility.Visible;
                 btnDelete.IsEnabled = false;
 
-                // Clear all the text boxes before adding a new customer.
                 foreach (var child in newTrasyGrid.Children)
                 {
                     var tb = child as TextBox;
@@ -291,9 +295,8 @@ namespace cs_proj_ostateczny
 
         private void ModeCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (existingPrzystankiNaTrasieGrid.IsEnabled)
+            if (newPrzystankiNaTrasieGrid.IsEnabled)
             {
-                existingPrzystankiNaTrasieGrid.IsEnabled = false;
                 newPrzystankiNaTrasieGrid.IsEnabled = false;
                 przystankiDataGrid.IsEnabled = false;
 
@@ -303,7 +306,6 @@ namespace cs_proj_ostateczny
             }
             else
             {
-                existingPrzystankiNaTrasieGrid.IsEnabled = true;
                 newPrzystankiNaTrasieGrid.IsEnabled = true;
                 przystankiDataGrid.IsEnabled = true;
 
@@ -372,23 +374,7 @@ namespace cs_proj_ostateczny
 
         private void existingPrzystanekNaTrasieComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (newPrzystankiNaTrasieGrid.Visibility == Visibility.Visible)
-            {
-                return;
-            }
-            if(existingPrzystanekNaTrasieComboBox.SelectedValue == null)
-            {
-                return;
-            }
-            var currentPrzystanekNaTrasie = przystankiNaTrasieViewSource.View.CurrentItem as Przystanki_na_trasie;
-            var currentIdPrzystanku = Int32.Parse(existingPrzystanekNaTrasieComboBox.SelectedValue.ToString());
-            var currentPrzystanek = (from c in context.Przystanki
-                              where c.id == currentIdPrzystanku
-                                     select c).FirstOrDefault();
 
-            currentPrzystanekNaTrasie.Przystanki = currentPrzystanek;
-            
-            przystankiNaTrasieViewSource.View.Refresh();
         }
 
     }
