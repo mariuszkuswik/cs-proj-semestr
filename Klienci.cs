@@ -12,9 +12,9 @@ namespace cs_proj_ostateczny
     using System;
     using System.Collections.Generic;
     
-    public partial class Klienci
+    public partial class Klienci : IdClass
     {
-        public int id { get; set; }
+        public override int id { get; set; }
         public string imie { get; set; }
         public string nazwisko { get; set; }
     }

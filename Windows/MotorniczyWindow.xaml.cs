@@ -32,20 +32,26 @@ namespace cs_proj_ostateczny
         private void NextCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             motorniczyViewSource.View.MoveCurrentToNext();
+            if (motorniczyViewSource.View.IsCurrentAfterLast)
+            {
+                motorniczyViewSource.View.MoveCurrentToPrevious();
+            }
         }
         private void PreviousCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             motorniczyViewSource.View.MoveCurrentToPrevious();
+            if (motorniczyViewSource.View.IsCurrentBeforeFirst)
+            {
+                motorniczyViewSource.View.MoveCurrentToNext();
+            }
         }
-        private void DeleteCustomerCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            // If existing window is visible, delete the customer and all their orders.
-            // In a real application, you should add warnings and allow the user to cancel the operation.
             var selectedMotorniczy = motorniczyViewSource.View.CurrentItem as Motorniczy;
 
             if (selectedMotorniczy == null)
             {
-                MessageBox.Show("Brak motorniczych do usunięcia");
+                MessageBox.Show("Nie wybrano żadnego motorniczego");
                 return;
             }
 
@@ -60,21 +66,8 @@ namespace cs_proj_ostateczny
             context.SaveChanges();
             motorniczyViewSource.View.Refresh();
         }
-        private int getNextId()
-        {
-            var current_id = 0;
-            foreach (var motorniczy in context.Motorniczy)
-            {
-                if (motorniczy.id > current_id)
-                {
-                    current_id = motorniczy.id;
-                }
-            }
 
-            return current_id + 1;
-        }
-
-        private void UpdateCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        private void CommitCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             if (newMotorniczyGrid.IsVisible)
             {
@@ -87,11 +80,23 @@ namespace cs_proj_ostateczny
 
                 Motorniczy newMotorniczy = new Motorniczy
                 {
-                    id = getNextId(),
+                    id = Utils.getNextId(context.Motorniczy),
                     imie = addImieTextBox.Text,
                     nazwisko = addNazwiskoTextBox.Text,
                     id_tramwaju = Int32.Parse(addMotorniczyComboBox.SelectedValue.ToString())
                 };
+
+                if (newMotorniczy.imie.Length <= 0)
+                {
+                    MessageBox.Show("Imię nie może być puste");
+                    return;
+                }
+
+                if (newMotorniczy.nazwisko.Length <= 0)
+                {
+                    MessageBox.Show("Nazwisko nie może być puste");
+                    return;
+                }
 
                 context.Motorniczy.Local.Add(newMotorniczy);
                 motorniczyViewSource.View.Refresh();
@@ -100,7 +105,6 @@ namespace cs_proj_ostateczny
 
                 newMotorniczyGrid.Visibility = Visibility.Collapsed;
                 existingMotorniczyGrid.Visibility = Visibility.Visible;
-                btnAdd.Content = "Dodaj przystanek";
                 btnDelete.IsEnabled = true;
             }
             else
@@ -115,16 +119,26 @@ namespace cs_proj_ostateczny
 
                 if (currentMotorniczy.imie.Length <= 0)
                 {
-                    MessageBox.Show("Nazwa nie może być pusta");
+                    MessageBox.Show("Imię nie może być puste");
                     return;
                 }
 
+                if (currentMotorniczy.nazwisko.Length <= 0)
+                {
+                    MessageBox.Show("Nazwisko nie może być puste");
+                    return;
+                }
+                var tramwaj = (from c in context.Tramwaje
+                                         where c.id == currentMotorniczy.id_tramwaju
+                                         select c).FirstOrDefault();
+                currentMotorniczy.Tramwaje = tramwaj;
             }
 
             context.SaveChanges();
+            motorniczyViewSource.View.Refresh();
 
         }
-        private void AddCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        private void SwitchCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             if (existingMotorniczyGrid.Visibility == Visibility.Collapsed)
             {

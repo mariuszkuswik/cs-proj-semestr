@@ -12,7 +12,7 @@ namespace cs_proj_ostateczny
     using System;
     using System.Collections.Generic;
     
-    public partial class Przystanki
+    public partial class Przystanki : IdClass
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Przystanki()
@@ -20,7 +20,7 @@ namespace cs_proj_ostateczny
             this.Przystanki_na_trasie = new HashSet<Przystanki_na_trasie>();
         }
     
-        public int id { get; set; }
+        public override int id { get; set; }
         public string nazwa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
