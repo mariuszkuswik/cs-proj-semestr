@@ -117,7 +117,15 @@
                 Grid.Row="3"
                 Content="TRAMWAJ:"
                 Style="{StaticResource Label}" />
-            <ComboBox Grid.Row="3" />
+            <ComboBox
+                x:Name="existingMotorniczyComboBox"
+                Grid.Row="3"
+                DisplayMemberPath="numer"
+                IsSynchronizedWithCurrentItem="True"
+                ItemsSource="{Binding Source={StaticResource tramwajeViewSource}}"
+                SelectedValue="{Binding Path=id_tramwaju}"
+                SelectedValuePath="id"
+                Style="{StaticResource ComboBox}" />
         </Grid>
         <Grid
             x:Name="newMotorniczyGrid"
@@ -167,9 +175,7 @@
                 x:Name="addMotorniczyComboBox"
                 Grid.Row="3"
                 DisplayMemberPath="numer"
-                IsSynchronizedWithCurrentItem="True"
                 ItemsSource="{Binding Source={StaticResource tramwajeViewSource}}"
-                SelectedValue="{Binding Path=id_tramwaju}"
                 SelectedValuePath="id"
                 Style="{StaticResource ComboBox}" />
 
@@ -192,8 +198,8 @@
                 <DataGridTextColumn
                     x:Name="id_tramwajuColumn"
                     Width="SizeToHeader"
-                    Binding="{Binding id_tramwaju}"
-                    Header="id tramwaju" />
+                    Binding="{Binding Tramwaje.numer}"
+                    Header="numer tramwaju" />
                 <DataGridTextColumn
                     x:Name="imieColumn"
                     Width="SizeToHeader"

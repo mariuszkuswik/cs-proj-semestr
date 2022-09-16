@@ -84,8 +84,7 @@ namespace cs_proj_ostateczny
                     MessageBox.Show("Należy wybrać tramwaj");
                     return;
                 }
-                // Create a new object because the old one
-                // is being tracked by EF now.
+
                 Motorniczy newMotorniczy = new Motorniczy
                 {
                     id = getNextId(),
@@ -93,16 +92,6 @@ namespace cs_proj_ostateczny
                     nazwisko = addNazwiskoTextBox.Text,
                     id_tramwaju = Int32.Parse(addMotorniczyComboBox.SelectedValue.ToString())
                 };
-
-                // Perform very basic validation
-                //if (newPrzystanek.imie.Length <= 0)
-                //{
-                //    MessageBox.Show("Nazwa nie może być pusta");
-                //    return;
-                //}
-
-                // Insert the new customer at correct position:
-                //int len = context.Motorniczy.Local.Count();
 
                 context.Motorniczy.Local.Add(newMotorniczy);
                 motorniczyViewSource.View.Refresh();
@@ -132,8 +121,6 @@ namespace cs_proj_ostateczny
 
             }
 
-            // Save the changes, either for a new customer, a new order
-            // or an edit to an existing customer or order.
             context.SaveChanges();
 
         }
@@ -171,7 +158,6 @@ namespace cs_proj_ostateczny
             context.Tramwaje.Load();
             motorniczyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("motorniczyViewSource")));
             tramwajeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tramwajeViewSource")));
-            // Załaduj dane poprzez ustawienie właściwości CollectionViewSource.Source:
             motorniczyViewSource.Source = context.Motorniczy.Local;
             tramwajeViewSource.Source = context.Tramwaje.Local;
         }
