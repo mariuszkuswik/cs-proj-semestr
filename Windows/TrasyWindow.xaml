@@ -12,23 +12,20 @@
     mc:Ignorable="d">
     <Window.Resources>
         <CollectionViewSource x:Key="trasyViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Trasy}}" />
+        <CollectionViewSource x:Key="przystankiNaTrasieViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki_na_trasie}}" />
+        <CollectionViewSource x:Key="przystankiViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Przystanki}}" />
         <RoutedUICommand x:Key="NextCommand" Text="Next" />
         <RoutedUICommand x:Key="PreviousCommand" Text="Previous" />
-        <RoutedUICommand x:Key="DeleteCustomerCommand" Text="Delete Customer" />
-        <RoutedUICommand x:Key="UpdateCommand" Text="Update" />
-        <RoutedUICommand x:Key="AddCommand" Text="Add" />
-        <RoutedUICommand x:Key="CancelCommand" Text="Cancel" />
-        <CollectionViewSource x:Key="trasyViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Trasy}}" />
-        <CollectionViewSource x:Key="trasyViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:Trasy}}" />
-        <CollectionViewSource x:Key="trasyViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:Trasy}}" />
-        <CollectionViewSource x:Key="trasyViewSource4" d:DesignSource="{d:DesignInstance {x:Type local:Trasy}}" />
+        <RoutedUICommand x:Key="DeleteCommand" Text="Delete" />
+        <RoutedUICommand x:Key="SwitchCommand" Text="Switch" />
+        <RoutedUICommand x:Key="CommitCommand" Text="Commit" />
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
         <CommandBinding Command="{StaticResource PreviousCommand}" Executed="PreviousCommandHandler" />
-        <CommandBinding Command="{StaticResource DeleteCustomerCommand}" Executed="DeleteCustomerCommandHandler" />
-        <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler" />
-        <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler" />
+        <CommandBinding Command="{StaticResource DeleteCommand}" Executed="DeleteCommandHandler" />
+        <CommandBinding Command="{StaticResource SwitchCommand}" Executed="SwitchCommandHandler" />
+        <CommandBinding Command="{StaticResource CommitCommand}" Executed="CommitCommandHandler" />
     </Window.CommandBindings>
     <Grid DataContext="{StaticResource trasyViewSource}">
         <Grid.RowDefinitions>
@@ -37,6 +34,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
             Height="36"
             Margin="2,2,2,0"
             VerticalAlignment="Top"
@@ -57,21 +56,21 @@
             <Button
                 Name="btnDelete"
                 Width="120"
-                Command="{StaticResource DeleteCustomerCommand}"
-                Content="Usuń przystanek"
+                Command="{StaticResource DeleteCommand}"
+                Content="Usuń"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
             <Button
                 Name="btnAdd"
                 Width="100"
-                Command="{StaticResource AddCommand}"
-                Content="Dodaj przystanek"
+                Command="{StaticResource SwitchCommand}"
+                Content="Dodaj / Edytuj"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
             <Button
                 Name="btnUpdate"
                 Width="80"
-                Command="{StaticResource UpdateCommand}"
+                Command="{StaticResource CommitCommand}"
                 Content="Zatwierdź"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
@@ -94,17 +93,17 @@
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
-                Content="TRASA:"
+                Content="EDYTUJ TRASĘ:"
                 Style="{StaticResource Label}" />
             <Label
                 Grid.Row="1"
                 Content="Nazwa:"
                 Style="{StaticResource Label}" />
             <TextBox
-                x:Name="NazwaTextBox"
+                x:Name="existingNazwaTextBox"
                 Grid.Row="1"
                 Style="{StaticResource TextBox}"
-                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
         </Grid>
         <Grid
             x:Name="newTrasyGrid"
@@ -124,7 +123,7 @@
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
-                Content="Trasa:"
+                Content="DODAJ TRASĘ:"
                 Style="{StaticResource Label}" />
             <Label
                 Grid.Row="1"
@@ -134,29 +133,56 @@
                 x:Name="addNazwaTextBox"
                 Grid.Row="1"
                 Style="{StaticResource TextBox}"
-                Text="{Binding Nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
         </Grid>
-        <DataGrid
-            x:Name="trasyDataGrid"
-            Grid.Row="2"
-            Margin="10,10,10,10"
-            AutoGenerateColumns="False"
-            EnableRowVirtualization="True"
-            IsReadOnly="True"
-            ItemsSource="{Binding Source={StaticResource trasyViewSource}}"
-            RowDetailsVisibilityMode="VisibleWhenSelected">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    x:Name="idColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding id}"
-                    Header="id" />
-                <DataGridTextColumn
-                    x:Name="nazwaColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding nazwa}"
-                    Header="nazwa" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="300" />
+                <ColumnDefinition Width="Auto" MinWidth="300" />
+            </Grid.ColumnDefinitions>
+            <DataGrid
+                x:Name="trasyDataGrid"
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="10,10,10,10"
+                AutoGenerateColumns="False"
+                EnableRowVirtualization="True"
+                IsReadOnly="True"
+                ItemsSource="{Binding Source={StaticResource trasyViewSource}}"
+                SelectionChanged="trasyDataGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        x:Name="nazwaColumn"
+                        Width="Auto"
+                        Binding="{Binding nazwa}"
+                        Header="nazwa" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid
+                x:Name="przystankiDataGrid"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="10,10,10,10"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding Source={StaticResource przystankiNaTrasieViewSource}}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        x:Name="idColumn2"
+                        Width="SizeToHeader"
+                        Binding="{Binding id_trasy}"
+                        Header="id_trasy" />
+                    <DataGridTextColumn
+                        x:Name="nazwaColumn2"
+                        Width="SizeToHeader"
+                        Binding="{Binding Przystanki.nazwa}"
+                        Header="Przystanek" />
+                    <DataGridTextColumn
+                        x:Name="nazwaColumn22"
+                        Width="SizeToHeader"
+                        Binding="{Binding numer_na_trasie}"
+                        Header="Numer na trasie" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>
