@@ -28,7 +28,7 @@ namespace cs_proj_ostateczny
         CollectionViewSource trasyViewSource;
         CollectionViewSource przystankiNaTrasieViewSource;
         CollectionViewSource przystankiViewSource;
-        int mode;
+        CollectionViewSource przystankiViewSource2;
 
         public TrasyWindow()
         {
@@ -127,6 +127,68 @@ namespace cs_proj_ostateczny
         {
             if (existingPrzystankiNaTrasieGrid.IsEnabled)
             {
+                if (newPrzystankiNaTrasieGrid.IsVisible)
+                {
+                    Trasy currentTrasa = (Trasy)trasyViewSource.View.CurrentItem;
+                    var trasaId = currentTrasa.id;
+
+                    if (addPrzystanekNaTrasieTextBox.Text == "")
+                    {
+                        MessageBox.Show("Numer na trasie nie może być pusty");
+                        return;
+                    }
+
+                    var przystanekId = Int32.Parse(addPrzystanekNaTrasieComboBox.SelectedValue.ToString());
+
+                    foreach (var przystanekNaTrasie in context.Przystanki_na_trasie)
+                    {
+                        if (przystanekNaTrasie.id_trasy == trasaId)
+                        {
+                            if (przystanekNaTrasie.id_przystanku == przystanekId)
+                            {
+                                MessageBox.Show("Ten przystanek już jest przypisany do tej trasy!");
+                                return;
+                            }
+                        }
+                    }
+
+
+                    Przystanki_na_trasie newPrzystanekNaTrasie = new Przystanki_na_trasie
+                    {
+                        id_trasy = trasaId,
+                        id_przystanku = przystanekId,
+                        numer_na_trasie = Int32.Parse(addPrzystanekNaTrasieTextBox.Text)
+                    };
+
+                   
+                    context.Przystanki_na_trasie.Local.Add(newPrzystanekNaTrasie);
+                    przystankiNaTrasieViewSource.View.Refresh();
+                    przystankiNaTrasieViewSource.View.MoveCurrentTo(newPrzystanekNaTrasie);
+
+
+                    newTrasyGrid.Visibility = Visibility.Collapsed;
+                    existingTrasyGrid.Visibility = Visibility.Visible;
+                    btnDelete.IsEnabled = true;
+                }
+                else
+                {
+                    Przystanki_na_trasie currentPrzystanekNaTrasie = (Przystanki_na_trasie)przystankiNaTrasieViewSource.View.CurrentItem;
+
+                    if (currentPrzystanekNaTrasie == null)
+                    {
+                        MessageBox.Show("Należy wybrać przystanek");
+                        return;
+                    }
+
+                    if (existingPrzystanekNaTrasieTextBox.Text == "")
+                    {
+                        MessageBox.Show("Numer na trasie nie może być pusty");
+                        return;
+                    }
+
+                }
+
+                context.SaveChanges();
                 return;
             }
 
@@ -176,6 +238,33 @@ namespace cs_proj_ostateczny
         }
         private void SwitchCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
+            if (existingPrzystankiNaTrasieGrid.IsEnabled)
+            {
+                if (existingPrzystankiNaTrasieGrid.Visibility == Visibility.Collapsed)
+                {
+                    existingPrzystankiNaTrasieGrid.Visibility = Visibility.Visible;
+                    newPrzystankiNaTrasieGrid.Visibility = Visibility.Collapsed;
+                    btnDelete.IsEnabled = true;
+                }
+                else
+                {
+                    existingPrzystankiNaTrasieGrid.Visibility = Visibility.Collapsed;
+                    newPrzystankiNaTrasieGrid.Visibility = Visibility.Visible;
+                    btnDelete.IsEnabled = false;
+
+                    // Clear all the text boxes before adding a new customer.
+                    foreach (var child in newPrzystankiNaTrasieGrid.Children)
+                    {
+                        var tb = child as TextBox;
+                        if (tb != null)
+                        {
+                            tb.Text = "";
+                        }
+                    }
+                }
+                return;
+            }
+
             if (existingTrasyGrid.Visibility == Visibility.Collapsed)
             {
                 existingTrasyGrid.Visibility = Visibility.Visible;
@@ -205,14 +294,17 @@ namespace cs_proj_ostateczny
             if (existingPrzystankiNaTrasieGrid.IsEnabled)
             {
                 existingPrzystankiNaTrasieGrid.IsEnabled = false;
+                newPrzystankiNaTrasieGrid.IsEnabled = false;
                 przystankiDataGrid.IsEnabled = false;
 
                 existingTrasyGrid.IsEnabled = true;
                 newTrasyGrid.IsEnabled = true;
                 trasyDataGrid.IsEnabled = true;
-            } else
+            }
+            else
             {
                 existingPrzystankiNaTrasieGrid.IsEnabled = true;
+                newPrzystankiNaTrasieGrid.IsEnabled = true;
                 przystankiDataGrid.IsEnabled = true;
 
                 existingTrasyGrid.IsEnabled = false;
@@ -232,6 +324,10 @@ namespace cs_proj_ostateczny
             context.Przystanki.Load();
             przystankiViewSource = ((CollectionViewSource)(this.FindResource("przystankiViewSource")));
             przystankiViewSource.Source = context.Przystanki.Local;
+
+            context.Przystanki.Load();
+            przystankiViewSource2 = ((CollectionViewSource)(this.FindResource("przystankiViewSource2")));
+            przystankiViewSource2.Source = context.Przystanki.Local;
 
             context.Trasy.Load();
             trasyViewSource = ((CollectionViewSource)(this.FindResource("trasyViewSource")));
@@ -276,6 +372,10 @@ namespace cs_proj_ostateczny
 
         private void existingPrzystanekNaTrasieComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (newPrzystankiNaTrasieGrid.Visibility == Visibility.Visible)
+            {
+                return;
+            }
             if(existingPrzystanekNaTrasieComboBox.SelectedValue == null)
             {
                 return;
@@ -290,5 +390,6 @@ namespace cs_proj_ostateczny
             
             przystankiNaTrasieViewSource.View.Refresh();
         }
+
     }
 }
