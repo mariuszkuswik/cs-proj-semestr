@@ -12,11 +12,13 @@ namespace cs_proj_ostateczny
     using System;
     using System.Collections.Generic;
     
-    public partial class Motorniczy : IdClass
+    public partial class Motorniczy
     {
-        public override int id { get; set; }
+        public int id { get; set; }
         public string imie { get; set; }
         public string nazwisko { get; set; }
         public int id_tramwaju { get; set; }
+    
+        public virtual Tramwaje Tramwaje { get; set; }
     }
 }

@@ -154,7 +154,7 @@ namespace cs_proj_ostateczny
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             context.Klienci.Load();
-            klienciViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("klienciViewSource")));
+            klienciViewSource = ((CollectionViewSource)(this.FindResource("klienciViewSource")));
             // Załaduj dane poprzez ustawienie właściwości CollectionViewSource.Source:
             klienciViewSource.Source = context.Klienci.Local;
         }

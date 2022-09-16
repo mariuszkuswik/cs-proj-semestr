@@ -71,10 +71,6 @@
     <Compile Include="Klienci.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Utils.cs" />
-    <Compile Include="Windows\KlienciWindow.xaml.cs">
-      <DependentUpon>KlienciWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,29 +89,33 @@
     <Compile Include="Motorniczy.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MotorniczyWindow.xaml.cs">
-      <DependentUpon>MotorniczyWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Przystanki.cs">
       <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\PrzystankiWindow.xaml.cs">
-      <DependentUpon>PrzystankiWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Przystanki_na_trasie.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Przystanki_na_trasieWindow.xaml.cs">
-      <DependentUpon>Przystanki_na_trasieWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Tramwaje.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TramwajeWindow.xaml.cs">
-      <DependentUpon>TramwajeWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Trasy.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utils.cs" />
+    <Compile Include="Windows\KlienciWindow.xaml.cs">
+      <DependentUpon>KlienciWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MotorniczyWindow.xaml.cs">
+      <DependentUpon>MotorniczyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PrzystankiWindow.xaml.cs">
+      <DependentUpon>PrzystankiWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Przystanki_na_trasieWindow.xaml.cs">
+      <DependentUpon>Przystanki_na_trasieWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TramwajeWindow.xaml.cs">
+      <DependentUpon>TramwajeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TrasyWindow.xaml.cs">
       <DependentUpon>TrasyWindow.xaml</DependentUpon>

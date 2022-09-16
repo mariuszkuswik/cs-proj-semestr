@@ -12,21 +12,21 @@ namespace cs_proj_ostateczny
     using System;
     using System.Collections.Generic;
     
-    public partial class Trasy : IdClass
+    public partial class Trasy
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Trasy()
         {
-            this.Tramwaje = new HashSet<Tramwaje>();
             this.Przystanki_na_trasie = new HashSet<Przystanki_na_trasie>();
+            this.Tramwaje = new HashSet<Tramwaje>();
         }
     
-        public override int id { get; set; }
+        public int id { get; set; }
         public string nazwa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tramwaje> Tramwaje { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Przystanki_na_trasie> Przystanki_na_trasie { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tramwaje> Tramwaje { get; set; }
     }
 }

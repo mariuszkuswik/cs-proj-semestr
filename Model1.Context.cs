@@ -28,8 +28,8 @@ namespace cs_proj_ostateczny
         public virtual DbSet<Klienci> Klienci { get; set; }
         public virtual DbSet<Motorniczy> Motorniczy { get; set; }
         public virtual DbSet<Przystanki> Przystanki { get; set; }
+        public virtual DbSet<Przystanki_na_trasie> Przystanki_na_trasie { get; set; }
         public virtual DbSet<Tramwaje> Tramwaje { get; set; }
         public virtual DbSet<Trasy> Trasy { get; set; }
-        public virtual DbSet<Przystanki_na_trasie> Przystanki_na_trasie { get; set; }
     }
 }
