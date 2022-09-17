@@ -118,6 +118,14 @@ namespace cs_proj_ostateczny
                         return;
                     }
                 }
+                foreach (var tramwaj in context.Tramwaje)
+                {
+                    if (tramwaj.id_trasy == trasa.id)
+                    {
+                        MessageBox.Show("Trasa jest przypisana do tramwaju!");
+                        return;
+                    }
+                }
                 context.Trasy.Remove(trasa);
             }
             context.SaveChanges();

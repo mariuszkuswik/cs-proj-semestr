@@ -15,21 +15,16 @@
         <CollectionViewSource x:Key="trasyViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Trasy}}" />
         <RoutedUICommand x:Key="NextCommand" Text="Next" />
         <RoutedUICommand x:Key="PreviousCommand" Text="Previous" />
-        <RoutedUICommand x:Key="DeleteCustomerCommand" Text="Delete Customer" />
-        <RoutedUICommand x:Key="UpdateCommand" Text="Update" />
-        <RoutedUICommand x:Key="AddCommand" Text="Add" />
-        <RoutedUICommand x:Key="CancelCommand" Text="Cancel" />
-        <CollectionViewSource x:Key="tramwajeViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Tramwaje}}" />
-        <CollectionViewSource x:Key="tramwajeViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:Tramwaje}}" />
-        <CollectionViewSource x:Key="tramwajeViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:Tramwaje}}" />
-        <CollectionViewSource x:Key="tramwajeViewSource4" d:DesignSource="{d:DesignInstance {x:Type local:Tramwaje}}" />
+        <RoutedUICommand x:Key="DeleteCommand" Text="Delete" />
+        <RoutedUICommand x:Key="SwitchCommand" Text="Switch" />
+        <RoutedUICommand x:Key="CommitCommand" Text="Commit" />
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler" />
         <CommandBinding Command="{StaticResource PreviousCommand}" Executed="PreviousCommandHandler" />
-        <CommandBinding Command="{StaticResource DeleteCustomerCommand}" Executed="DeleteCommandHandler" />
-        <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler" />
-        <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler" />
+        <CommandBinding Command="{StaticResource DeleteCommand}" Executed="DeleteCommandHandler" />
+        <CommandBinding Command="{StaticResource SwitchCommand}" Executed="SwitchCommandHandler" />
+        <CommandBinding Command="{StaticResource CommitCommand}" Executed="CommitCommandHandler" />
     </Window.CommandBindings>
     <Grid DataContext="{StaticResource tramwajeViewSource}">
         <Grid.RowDefinitions>
@@ -58,21 +53,21 @@
             <Button
                 Name="btnDelete"
                 Width="120"
-                Command="{StaticResource DeleteCustomerCommand}"
-                Content="Usuń przystanek"
+                Command="{StaticResource DeleteCommand}"
+                Content="Usuń"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
             <Button
                 Name="btnAdd"
                 Width="100"
-                Command="{StaticResource AddCommand}"
-                Content="Dodaj przystanek"
+                Command="{StaticResource SwitchCommand}"
+                Content="Dodaj / Edytuj"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
             <Button
                 Name="btnUpdate"
                 Width="80"
-                Command="{StaticResource UpdateCommand}"
+                Command="{StaticResource CommitCommand}"
                 Content="Zatwierdź"
                 FontSize="11"
                 Style="{StaticResource NavButton}" />
@@ -94,18 +89,17 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
-                Content="PRZYSTANEK:"
+                Content="EDYTUJ PRZYSTANEK:"
                 Style="{StaticResource Label}" />
             <Label
                 Grid.Row="1"
                 Content="Numer:"
                 Style="{StaticResource Label}" />
             <TextBox
-                x:Name="NazwaTextBox"
+                x:Name="existingNumerTextBox"
                 Grid.Row="1"
                 Style="{StaticResource TextBox}"
                 Text="{Binding numer, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
@@ -113,13 +107,17 @@
                 Grid.Row="2"
                 Content="Data ostatniego przegladu:"
                 Style="{StaticResource Label}" />
-            <DatePicker Grid.Row="2" Style="{StaticResource DatePicker}" />
+            <DatePicker
+                x:Name="existingTramwajeDatePicker"
+                Grid.Row="2"
+                SelectedDate="{Binding data_ostatniego_przeglądu}"
+                Style="{StaticResource DatePicker}" />
             <Label
                 Grid.Row="3"
-                Content="ID trasy:"
+                Content="Trasa:"
                 Style="{StaticResource Label}" />
             <ComboBox
-                x:Name="TramwajeComboBox"
+                x:Name="existingTramwajeComboBox"
                 Grid.Row="3"
                 DisplayMemberPath="nazwa"
                 IsSynchronizedWithCurrentItem="True"
@@ -144,20 +142,43 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
-                Content="PRZYSTANEK:"
+                Content="DODAJ PRZYSTANEK:"
                 Style="{StaticResource Label}" />
             <Label
                 Grid.Row="1"
                 Content="Nazwa:"
                 Style="{StaticResource Label}" />
             <TextBox
-                x:Name="addNazwaTextBox"
+                x:Name="addNumerTextBox"
                 Grid.Row="1"
                 Style="{StaticResource TextBox}"
                 Text="{Binding numer, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="2"
+                Content="Data ostatniego przegladu:"
+                Style="{StaticResource Label}" />
+            <DatePicker
+                x:Name="addTramwajeDatePicker"
+                Grid.Row="2"
+                SelectedDate="{Binding data_ostatniego_przeglądu}"
+                Style="{StaticResource DatePicker}" />
+            <Label
+                Grid.Row="3"
+                Content="Trasa:"
+                Style="{StaticResource Label}" />
+            <ComboBox
+                x:Name="addTramwajeComboBox"
+                Grid.Row="3"
+                DisplayMemberPath="nazwa"
+                IsSynchronizedWithCurrentItem="True"
+                ItemsSource="{Binding Source={StaticResource trasyViewSource}}"
+                SelectedValuePath="id"
+                Style="{StaticResource ComboBox}" />
         </Grid>
         <DataGrid
             x:Name="tramwajeDataGrid"
@@ -169,31 +190,21 @@
             ItemsSource="{Binding Source={StaticResource tramwajeViewSource}}"
             RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                <DataGridTemplateColumn
-                    x:Name="data_ostatniego_przegląduColumn"
-                    Width="SizeToHeader"
-                    Header="data ostatniego przeglądu">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding data_ostatniego_przeglądu, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn
-                    x:Name="idColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding id}"
-                    Header="id" />
-                <DataGridTextColumn
-                    x:Name="id_trasyColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding id_trasy}"
-                    Header="id trasy" />
                 <DataGridTextColumn
                     x:Name="numerColumn"
-                    Width="SizeToHeader"
+                    Width="Auto"
                     Binding="{Binding numer}"
                     Header="numer" />
+                <DataGridTextColumn
+                    x:Name="dataColumn"
+                    Width="Auto"
+                    Binding="{Binding data_ostatniego_przeglądu, StringFormat=\{0:dd.MM.yyyy\}}"
+                    Header="data ostatniego przeglądu" />
+                <DataGridTextColumn
+                    x:Name="id_trasyColumn"
+                    Width="Auto"
+                    Binding="{Binding Trasy.nazwa}"
+                    Header="trasa" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
