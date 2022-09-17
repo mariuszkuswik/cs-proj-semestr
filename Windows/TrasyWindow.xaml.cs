@@ -319,7 +319,7 @@ namespace cs_proj_ostateczny
         private void SwitchCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             if (newPrzystankiNaTrasieGrid.IsEnabled)
-            {
+            {   
                 if (existingPrzystankiNaTrasieGrid.Visibility == Visibility.Collapsed)
                 {
                     existingPrzystankiNaTrasieGrid.Visibility = Visibility.Visible;
