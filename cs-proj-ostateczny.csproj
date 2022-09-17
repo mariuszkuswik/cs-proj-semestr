@@ -111,9 +111,6 @@
     <Compile Include="Windows\PrzystankiWindow.xaml.cs">
       <DependentUpon>PrzystankiWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Przystanki_na_trasieWindow.xaml.cs">
-      <DependentUpon>Przystanki_na_trasieWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\TramwajeWindow.xaml.cs">
       <DependentUpon>TramwajeWindow.xaml</DependentUpon>
     </Compile>
@@ -145,10 +142,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\PrzystankiWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Przystanki_na_trasieWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,7 +16,8 @@ using System.Data.Entity;
 namespace cs_proj_ostateczny
 {
     /// <summary>
-    /// Logika interakcji dla klasy KlienciWindow.xaml
+    /// Logika interakcji dla klasy KlienciWindow.xaml.
+    /// Pozwala przeprowadzać operacje CRUD na tabeli klienci.
     /// </summary>
     public partial class KlienciWindow : Window
     {
@@ -139,7 +140,6 @@ namespace cs_proj_ostateczny
                 newKlienciGrid.Visibility = Visibility.Visible;
                 btnDelete.IsEnabled = false;
 
-                // Clear all the text boxes before adding a new customer.
                 foreach (var child in newKlienciGrid.Children)
                 {
                     var tb = child as TextBox;
@@ -155,7 +155,6 @@ namespace cs_proj_ostateczny
         {
             context.Klienci.Load();
             klienciViewSource = ((CollectionViewSource)(this.FindResource("klienciViewSource")));
-            // Załaduj dane poprzez ustawienie właściwości CollectionViewSource.Source:
             klienciViewSource.Source = context.Klienci.Local;
         }
     }

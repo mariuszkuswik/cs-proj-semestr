@@ -16,7 +16,8 @@ using System.Windows.Shapes;
 namespace cs_proj_ostateczny
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
+    /// Logika interakcji dla klasy MainWindow.xaml.
+    /// Pozwala na otwieranie pozostałych okien aplikacji.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -41,11 +42,6 @@ namespace cs_proj_ostateczny
         private void MotorniczyButton_Click(object sender, RoutedEventArgs e)
         {
             MotorniczyWindow subWindow = new MotorniczyWindow();
-            subWindow.Show();
-        }
-        private void Przystanki_na_trasieButton_Click(object sender, RoutedEventArgs e)
-        {
-            Przystanki_na_trasieWindow subWindow = new Przystanki_na_trasieWindow();
             subWindow.Show();
         }
         private void TramwajeButton_Click(object sender, RoutedEventArgs e)

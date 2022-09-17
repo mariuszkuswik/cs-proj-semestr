@@ -11,7 +11,9 @@ namespace cs_proj_ostateczny
 {
     using System;
     using System.Collections.Generic;
-    
+    /// <summary>
+    /// Reprezentacja tabeli motorniczy.
+    /// </summary>
     public partial class Motorniczy : IdClass
     {
         public override int id { get; set; }

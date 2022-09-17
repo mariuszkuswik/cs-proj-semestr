@@ -101,6 +101,7 @@
             <TextBox
                 x:Name="existingNumerTextBox"
                 Grid.Row="1"
+                PreviewTextInput="Numer_PreviewTextInput"
                 Style="{StaticResource TextBox}"
                 Text="{Binding numer, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <Label
@@ -156,6 +157,7 @@
             <TextBox
                 x:Name="addNumerTextBox"
                 Grid.Row="1"
+                PreviewTextInput="Numer_PreviewTextInput"
                 Style="{StaticResource TextBox}"
                 Text="{Binding numer, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <Label

@@ -12,6 +12,9 @@ namespace cs_proj_ostateczny
     using System;
     using System.Collections.Generic;
     
+    /// <summary>
+    /// Reprezentacja tabeli klienci.
+    /// </summary>
     public partial class Klienci : IdClass
     {
         public override int id { get; set; }

@@ -190,20 +190,20 @@
             RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    x:Name="id_tramwajuColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding Tramwaje.numer}"
-                    Header="numer tramwaju" />
-                <DataGridTextColumn
                     x:Name="imieColumn"
-                    Width="SizeToHeader"
+                    Width="Auto"
                     Binding="{Binding imie}"
                     Header="imie" />
                 <DataGridTextColumn
                     x:Name="nazwiskoColumn"
-                    Width="SizeToHeader"
+                    Width="Auto"
                     Binding="{Binding nazwisko}"
                     Header="nazwisko" />
+                <DataGridTextColumn
+                    x:Name="id_tramwajuColumn"
+                    Width="Auto"
+                    Binding="{Binding Tramwaje.numer}"
+                    Header="numer tramwaju" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

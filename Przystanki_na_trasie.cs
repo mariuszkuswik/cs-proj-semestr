@@ -12,6 +12,9 @@ namespace cs_proj_ostateczny
     using System;
     using System.Collections.Generic;
     
+    /// <summary>
+    /// Reprezentacja tabeli przystanki na trasie.
+    /// </summary>
     public partial class Przystanki_na_trasie
     {
         public int id_trasy { get; set; }

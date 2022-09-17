@@ -20,7 +20,8 @@ using System.Text.RegularExpressions;
 namespace cs_proj_ostateczny
 {
     /// <summary>
-    /// Logika interakcji dla klasy TrasyWindow.xaml
+    /// Logika interakcji dla klasy TrasyWindow.xaml.
+    /// Pozwala przeprowadzać operacje CRUD na tabeli trasy oraz przystanki_na_trasach.
     /// </summary>
     public partial class TrasyWindow : Window
     {

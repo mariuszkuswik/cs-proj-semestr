@@ -13,11 +13,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.Entity;
+using System.Text.RegularExpressions;
 
 namespace cs_proj_ostateczny
 {
     /// <summary>
-    /// Logika interakcji dla klasy TramwajeWindow.xaml
+    /// Logika interakcji dla klasy TramwajeWindow.xaml.
+    /// Pozwala przeprowadzać operacje CRUD na tabeli tramwaje.
     /// </summary>
     public partial class TramwajeWindow : Window
     {
@@ -177,6 +179,16 @@ namespace cs_proj_ostateczny
             // Załaduj dane poprzez ustawienie właściwości CollectionViewSource.Source:
             tramwajeViewSource.Source = context.Tramwaje.Local;
             trasyViewSource.Source = context.Trasy.Local;
+        }
+
+        private static readonly Regex _regex = new Regex("[^0-9]+"); //regex that matches disallowed text
+        private static bool IsTextAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
+        private void Numer_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

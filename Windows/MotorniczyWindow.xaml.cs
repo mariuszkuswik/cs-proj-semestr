@@ -17,7 +17,8 @@ using System.Data.Entity;
 namespace cs_proj_ostateczny
 {
     /// <summary>
-    /// Logika interakcji dla klasy MotorniczyWindow.xaml
+    /// Logika interakcji dla klasy MotorniczyWindow.xaml.
+    /// Pozwala przeprowadzać operacje CRUD na tabeli motorniczy.
     /// </summary>
     public partial class MotorniczyWindow : Window
     {

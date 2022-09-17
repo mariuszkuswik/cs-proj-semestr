@@ -12,6 +12,9 @@ namespace cs_proj_ostateczny
     using System;
     using System.Collections.Generic;
     
+    /// <summary>
+    /// Reprezentacja tabeli trasy.
+    /// </summary>
     public partial class Trasy : IdClass
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
